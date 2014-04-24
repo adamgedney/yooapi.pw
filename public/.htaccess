@@ -5,6 +5,8 @@
 
     RewriteEngine On
 
+    RewriteBase /var/www/public
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
