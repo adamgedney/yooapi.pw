@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'yootunes',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => 'yooapiss11',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
