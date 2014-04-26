@@ -80,7 +80,7 @@ Route::get('delete-playlist/{playlistId}', 'PlaylistsController@deletePlaylist')
 
 //Library routes============================//
 
-Route::get('get-library/{id}/{sortBy}/{sortOrder}', 'LibraryController@getLibrary');
+Route::get('get-library/{id}/{sortBy}/{sortOrder}/{page}', 'LibraryController@getLibrary');
 
 Route::get('add-to-library/{songId}/{userId}', 'LibraryController@addToLibrary');
 

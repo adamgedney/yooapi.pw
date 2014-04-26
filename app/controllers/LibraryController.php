@@ -8,8 +8,10 @@ class LibraryController extends BaseController {
 
 
 
-	public function getLibrary($id, $sortBy, $sortOrder)
+	public function getLibrary($id, $sortBy, $sortOrder, $page)
 	{
+		$limit = 3;
+
 		//Defaults sort order if none present
 		if($sortBy === 'def' || $sortOrder === 'def'){
 			$sortBy 	= 'library_songs.created_at';
@@ -22,6 +24,8 @@ class LibraryController extends BaseController {
 							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
+							->take($limit)
+							->skip(30)
 							->get();
 
 
