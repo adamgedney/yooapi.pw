@@ -40,7 +40,7 @@ class LibraryController extends BaseController {
 
 
 		$obj = array(
-			'library'	=>json_encode($library),
+			'library'	=>$library,
 			'count'		=>$libraryCount,
 			'limit'  	=>$limit,
 			'skip' 		=>(int)$page
@@ -48,7 +48,7 @@ class LibraryController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($obj);
+		return Response::json(json_encode($obj));
 	}
 
 
