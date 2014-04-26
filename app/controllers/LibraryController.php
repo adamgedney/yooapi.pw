@@ -12,10 +12,6 @@ class LibraryController extends BaseController {
 	{
 		$limit = 30;
 
-		//Return count of full library
-		//divide results by 30  (= # of pages)
-		//store #pages in array
-		//cycle through pages on scroll
 		$libraryCount = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
 							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
