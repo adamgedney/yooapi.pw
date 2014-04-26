@@ -10,7 +10,18 @@ class LibraryController extends BaseController {
 
 	public function getLibrary($id, $sortBy, $sortOrder, $page)
 	{
-		$limit = 3;
+		$limit = 30;
+
+		//Return count of full library
+		//divide results by 30  (= # of pages)
+		//store #pages in array
+		//cycle through pages on scroll
+		$libraryCount = Library::where('user_id', '=', $id)
+							->where('is_deleted', '=', NULL)
+							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+							->join('songs', 'songs.id', '=', 'library_songs.song_id')
+							->count();
+
 
 		//Defaults sort order if none present
 		if($sortBy === 'def' || $sortOrder === 'def'){
@@ -25,13 +36,20 @@ class LibraryController extends BaseController {
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
 							->take($limit)
-							->skip(30)
+							->skip($page)
 							->get();
 
 
+		$obj = array(
+			'library'	=>$library,
+			'count'		=>$libraryCount,
+			'limit'  	=>$limit,
+			'skip' 		=>$page
+		);
+
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($library);
+		return Response::json($obj);
 	}
 
 
