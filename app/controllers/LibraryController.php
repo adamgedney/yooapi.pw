@@ -40,15 +40,17 @@ class LibraryController extends BaseController {
 
 
 		$obj = array(
-			'library'	=>$library,
+			'library'	=>(array)$library,
 			'count'		=>$libraryCount,
 			'limit'  	=>$limit,
 			'skip' 		=>(int)$page
 		);
 
 
+
+
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($library);
+		return Response::json($obj);
 	}
 
 
