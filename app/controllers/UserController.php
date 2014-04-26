@@ -28,8 +28,6 @@ class UserController extends BaseController {
 		//Create a new library for the user
 		Library::insert(array('user_id'=>$userId));
 
-		//Create a new default device for the user
-		$this->device($userId, 'default', '0');
 
 
 
