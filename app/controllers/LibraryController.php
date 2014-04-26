@@ -43,7 +43,7 @@ class LibraryController extends BaseController {
 			'library'	=>$library,
 			'count'		=>$libraryCount,
 			'limit'  	=>$limit,
-			'skip' 		=>$page
+			'skip' 		=>(int)$page
 		);
 
 
