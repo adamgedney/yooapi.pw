@@ -442,7 +442,7 @@ class UserController extends BaseController {
 
 
 		//If this is a new device, insert
-		if($newDeviceExists === 0 && $currentDeviceExists === 0){
+		if($newDeviceExists == "0" && $currentDeviceExists == "0"){
 
 			$insertDevice = Devices::insert(array(
 				'user_id' 	=> $userId,
@@ -452,7 +452,7 @@ class UserController extends BaseController {
 
 		//If new device name doesnt exist & the current device DOES EXIST
 		//That means this is an update
-		}else if($newDeviceExists === 0 && $currentDeviceExists !== 0){
+		}else if($newDeviceExists == "0" && $currentDeviceExists !== "0"){
 
 			$updateDevice = Devices::where('user_id', '=', $userId)
 									->where('name', '=', $currentDeviceId)
