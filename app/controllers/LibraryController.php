@@ -19,7 +19,6 @@ class LibraryController extends BaseController {
 		$libraryCount = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
 							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
-							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->count();
 
 
@@ -36,7 +35,7 @@ class LibraryController extends BaseController {
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
 							->take($limit)
-							->skip($page)
+							->skip((int)$page)
 							->get();
 
 
