@@ -48,7 +48,7 @@ class LibraryController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json(json_encode($obj));
+		return Response::json($library);
 	}
 
 
