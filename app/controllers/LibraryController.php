@@ -35,7 +35,7 @@ class LibraryController extends BaseController {
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
 							->take($limit)
-							->skip((int)$page)
+							// ->skip((int)$page)
 							->get();
 
 
