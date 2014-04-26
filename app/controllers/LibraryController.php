@@ -34,13 +34,13 @@ class LibraryController extends BaseController {
 							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
-							// ->take($limit)
-							// ->skip((int)$page)
+							->take($limit)
+							->skip((int)$page)
 							->get();
 
 
 		$obj = array(
-			'library'	=>$library,
+			'library'	=>json_encode($library),
 			'count'		=>$libraryCount,
 			'limit'  	=>$limit,
 			'skip' 		=>(int)$page
