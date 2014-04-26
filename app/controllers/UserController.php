@@ -11,7 +11,8 @@ class UserController extends BaseController {
 			'email'				=>$email,
 			'password'			=>$pw,
 			'registered_with'	=>$with,
-			'is_deleted'		=>'false'
+			'is_deleted'		=>'false',
+			'title' 			=> 'Mrs.'
 		));
 
 
@@ -146,6 +147,7 @@ class UserController extends BaseController {
 
 		$signup;
 		$userId;
+		$title;
 
 		//Does user already exist?
 		$exists = User::where('plus_id', '=', $id)->count();
@@ -154,12 +156,21 @@ class UserController extends BaseController {
 			//If Plus user does NOT already exist
 			if($exists == "0"){
 
+				//Set title according to gender
+				if($gender == "male"){
+					$title = "Mr.";
+				}else if($gender == "female"){
+					$title == "Mrs.";
+				}
+
 				//Create new Plus user
 				$signup = User::insert(array(
 					'display_name'		=> $name,
 					'plus_id'			=> $id,
 					'gender'			=> $gender,
-					'registered_with'	=> 'plus'
+					'registered_with'	=> 'plus',
+					'title'				=> $title,
+					'is_deleted' 		=> 'false'
 				));
 
 
@@ -204,7 +215,7 @@ class UserController extends BaseController {
 
 
 
-	public function updateUser($id, $name, $email, $password)
+	public function updateUser($id, $title, $name, $email, $birthdate, $password)
 	{
 
 
@@ -226,13 +237,19 @@ class UserController extends BaseController {
 				$email = $user[0]->email;
 			}
 
+			if($birthdate == "0"){
+				$birthdate = $user[0]->birthdate;
+			}
+
 
 			//Update user data
 			$updateUser = User::where('id', '=', $id)
 								->update(array(
-									'display_name'=>$name,
-									'email'=>$email,
-									'password'=>$password
+									'title'			=>$title,
+									'display_name'	=>$name,
+									'email'			=>$email,
+									'birthdate'		=>$birthdate,
+									'password'		=>$password
 								));
 
 
