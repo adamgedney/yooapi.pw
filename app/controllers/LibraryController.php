@@ -40,7 +40,7 @@ class LibraryController extends BaseController {
 
 
 		$obj = array(
-			'library'	=> (array)json_encode($library),
+			'library'	=> json_encode((array)$library),
 			'count'		=>$libraryCount,
 			'limit'  	=>$limit,
 			'skip' 		=>(int)$page
