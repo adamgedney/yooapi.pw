@@ -215,7 +215,7 @@ class UserController extends BaseController {
 
 
 
-	public function updateUser($id, $title, $name, $email, $birthdate, $password)
+	public function updateUser($id, $title, $name, $email, $birthMonth, $birthDay, $birthYear, $password)
 	{
 
 
@@ -237,19 +237,21 @@ class UserController extends BaseController {
 				$email = $user[0]->email;
 			}
 
-			if($birthdate == "0"){
-				$birthdate = $user[0]->birthdate;
-			}
+			// if($birthdate == "0"){
+			// 	$birthdate = $user[0]->birthdate;
+			// }
 
 
 			//Update user data
 			$updateUser = User::where('id', '=', $id)
 								->update(array(
-									'title'			=>$title,
-									'display_name'	=>$name,
-									'email'			=>$email,
-									'birthdate'		=>$birthdate,
-									'password'		=>$password
+									'title'			=> $title,
+									'display_name'	=> $name,
+									'email'			=> $email,
+									'birthMonth'	=> $birthMonth,
+									'birthDay' 		=> $birthDay,
+									'birthYear' 	=> $birthYear,
+									'password'		=> $password
 								));
 
 
