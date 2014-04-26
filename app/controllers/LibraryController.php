@@ -10,7 +10,7 @@ class LibraryController extends BaseController {
 
 	public function getLibrary($id, $sortBy, $sortOrder, $page)
 	{
-		$limit = 30;
+		$limit = 50;
 
 		$libraryCount = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
