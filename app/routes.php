@@ -23,6 +23,8 @@ Route::get('reset-pass/{userId}/{password}', 'UserController@resetPassword');
 
 Route::get('restore-user/{email}/{pw}', 'UserController@restoreUser');
 
+Route::get('set-theme/{userId}/{theme}', 'UserController@setTheme');
+
 
 
 

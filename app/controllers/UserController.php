@@ -12,7 +12,8 @@ class UserController extends BaseController {
 			'password'			=>$pw,
 			'registered_with'	=>$with,
 			'is_deleted'		=>'false',
-			'title' 			=> 'Mrs.'
+			'title' 			=> 'Mrs.',
+			'theme' 			=> 'light'
 		));
 
 
@@ -170,7 +171,8 @@ class UserController extends BaseController {
 					'gender'			=> $gender,
 					'registered_with'	=> 'plus',
 					'title'				=> $title,
-					'is_deleted' 		=> 'false'
+					'is_deleted' 		=> 'false',
+					'theme' 			=> 'light'
 				));
 
 
@@ -595,6 +597,36 @@ class UserController extends BaseController {
 		header('Access-Control-Allow-Origin: *');
 		return Response::json($obj);
 	}
+
+
+
+
+
+
+
+
+
+	public function setTheme($userId, $theme)
+	{
+
+
+		//Update user data
+		$updateUser = User::where('id', '=', $userId)
+							->update(array(
+								'theme'	=> $theme
+							));
+
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($updateUser);
+	}
+
+
+
+
+
 
 
 
