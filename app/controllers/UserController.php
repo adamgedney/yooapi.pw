@@ -59,8 +59,10 @@ class UserController extends BaseController {
 	{
 
 		$userId 	= "";
+		$userTheme 	= "";
 		$success 	= false;
 		$restorable = false;
+
 
 
 		//First check to see if this user exists
@@ -78,8 +80,9 @@ class UserController extends BaseController {
 					->where('is_deleted', '=', 'false')
 					->get();
 
-			$userId = $userObj[0]->id;
-			$success = true;
+			$userId 	= $userObj[0]->id;
+			$userTheme 	= $userObj[0]->theme;
+			$success 	= true;
 
 
 
@@ -104,7 +107,8 @@ class UserController extends BaseController {
 			'success'	=>$success,
 			'userId'	=>$userId,
 			'email'		=>$email,
-			'restorable'=> $restorable
+			'restorable'=>$restorable,
+			'theme' 	=>$userTheme
 		);
 
 
