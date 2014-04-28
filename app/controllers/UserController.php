@@ -49,6 +49,7 @@ class UserController extends BaseController {
 	{
 
 		$userId 	= "";
+		$userObj;
 		$userTheme 	= "";
 		$success 	= false;
 		$restorable = false;
@@ -94,6 +95,7 @@ class UserController extends BaseController {
 
 		//Return object
 		$obj = array(
+			json_decode($userObj, true),
 			'success'	=>$success,
 			'userId'	=>$userId,
 			'email'		=>$email,
@@ -143,6 +145,7 @@ class UserController extends BaseController {
 		$signup;
 		$userId;
 		$title;
+		$user;
 
 		//Does user already exist?
 		$exists = User::where('plus_id', '=', $id)->count();
@@ -194,6 +197,7 @@ class UserController extends BaseController {
 
 			//Build return object
 			$obj = array(
+				json_decode($user, true),
 				'response'	=> (empty($signup)) ? "User Exists" : $signup,
 				'userId'	=> $userId
 			);
@@ -383,6 +387,7 @@ class UserController extends BaseController {
 	{
 
 		$userId = "";
+		$userRow;
 		$message = "User account restored";
 
 		//First check to see if this user exists as DELETED
@@ -417,6 +422,7 @@ class UserController extends BaseController {
 
 		//Return object
 		$obj = array(
+			json_decode($userRow, true),
 			'message'	=>$message,
 			'userId'	=>$userId,
 			'email'     =>$email
