@@ -32,18 +32,8 @@ class UserController extends BaseController {
 
 
 
-
-		//Return object
-		$obj = array(
-			'response'	=>$signup,
-			'userId'	=>$userId,
-			'email'		=>$email
-		);
-
-
-
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($obj);
+		return Response::json($user);
 	}
 
 

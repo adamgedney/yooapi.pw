@@ -188,7 +188,17 @@ class SearchController extends BaseController {
 	//Primary data analyzer & merger.
 	public function assumptionsEngine($getLocalItunes, $youtubeItem, $q){
 
+		//this runs 50 times. FOr each youtube video
+		//I need o run through each itunes result and stuff merge into DB
+		//If itunes result is 3, then I need to run 47 more times.
 
+		//1. get length of itunes results
+		//2. calculate difference
+		//3. run for loop 50 times
+		//if 3 itunes results, run all 3 over each video
+		//if zero results, just push youtube into DB w/out merge data
+		//Is this function already doing that?
+		//hmmmm
 
 		//=========================//
 		//Try writing a for loop. If itunes results length != to youtube results
@@ -209,10 +219,10 @@ class SearchController extends BaseController {
 		//Loop through all ITUNES RESULTS
 		foreach($getLocalItunes as $songItem){
 
-			$songFilter 	= $songItem->track_name;
-			$artistFilter 	= $songItem->artist_name;
-			$albumFilter 	= $songItem->collection_name;
-			$genreFilter 	= $songItem->primary_genre;
+			$songFilter 		= $songItem->track_name;
+			$artistFilter 		= $songItem->artist_name;
+			$albumFilter 		= $songItem->collection_name;
+			$genreFilter 		= $songItem->primary_genre;
 
 			$itunesSongLink 	= $songItem->track_view_url;
 			$itunesArtistLink 	= $songItem->artist_view_url;
