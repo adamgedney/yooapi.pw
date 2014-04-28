@@ -640,7 +640,7 @@ class UserController extends BaseController {
 
 		$from 		= 'no-reply@yootunes.com';
 		$support 	= 'support@yootunes.com';
-		$link 		= 'http://localhost:9000/?reset=' . $token;
+		$link 		= 'http://yootunes.com/?reset=' . $token;
 
 		//MAIL password reset email
 		$header  = 'MIME-Version: 1.0' . "\r\n";
