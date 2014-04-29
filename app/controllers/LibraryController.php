@@ -61,7 +61,7 @@ class LibraryController extends BaseController {
 
 
 	//Add song to library
-	public function addToLibrary($songId, $userId)
+	public static function addToLibrary($songId, $userId)
 	{
 		$librarySongs = 'Song already exists';
 

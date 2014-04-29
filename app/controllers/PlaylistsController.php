@@ -77,7 +77,7 @@ class PlaylistsController extends BaseController {
 
 
 
-		//Create a new playlist for user
+		//Create a new playlist for current user
 		$newPlaylist = Playlists::insert(array(
 			'name'		=>$playlistName,
 			'user_id'	=>$userId,
@@ -116,13 +116,18 @@ class PlaylistsController extends BaseController {
 
 		for($sharedSongs as $song){
 
+			$songId = $song->song_id;
+
 			//Insert new playlist song on playlist id
 			$sharedSongsAdded = PlaylistSongs::insert(array(
 				'playlist_id'=>$playlistId,
-				'song_id'=>$song->song_id));
+				'song_id'=>$songId));
 
 			//Add song to array for return data
-			array_push($addedSharedSongs, $song->song_id);
+			array_push($addedSharedSongs, $songId);
+
+			//Add song to library
+			LibraryController::addToLibrary($songId, $userId);
 		}
 
 
