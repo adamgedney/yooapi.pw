@@ -113,21 +113,33 @@ class PlaylistsController extends BaseController {
 								->join('songs', 'songs.id', '=', 'playlist_songs.song_id')
 								->get();
 
-
+$testSongId;
+$sharedAdded;
 		foreach($sharedSongs as $song){
 
 			$songId = $song->song_id;
+			$testSongId = $songId;
 
 			//Insert new playlist song on playlist id
 			$sharedSongsAdded = PlaylistSongs::insert(array(
 				'playlist_id'=>$playlistId,
 				'song_id'=>$songId));
 
+			$sharedAdded = $sharedSongsAdded;
+
 			//Add song to array for return data
 			array_push($addedSharedSongs, $songId);
 
 			//Add song to library
-			LibraryController::addToLibrary($songId, $userId);
+			$addtolib = LibraryController::addToLibrary($songId, $userId);
+		}
+
+		$obj = {
+			'addtolib'=>$addtolib,
+			'array'=>$addedSharedSongs,
+			'testsongid'=>$testSongId,
+			'sharedAddedtoPL'=>$sharedAdded
+
 		}
 
 
@@ -135,7 +147,7 @@ class PlaylistsController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($addedSharedSongs);
+		return Response::json($obj);
 	}
 
 
