@@ -107,7 +107,7 @@ class PlaylistsController extends BaseController {
 
 		//get Shared playlist songs & loop through inserting them into new playlist
 		//Get playlists on playlistId
-		$sharedSongs = Playlists::where('playlists.id', '=', $playlistId)
+		$sharedSongs = Playlists::where('playlists.id', '=', $sharedPlaylistId)
 								->where('playlist_songs.is_deleted', '=', NULL)
 								->join('playlist_songs', 'playlists.id', '=', 'playlist_songs.playlist_id')
 								->join('songs', 'songs.id', '=', 'playlist_songs.song_id')
