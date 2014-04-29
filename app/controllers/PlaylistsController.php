@@ -113,13 +113,15 @@ class PlaylistsController extends BaseController {
 								->join('songs', 'songs.id', '=', 'playlist_songs.song_id')
 								->get();
 
-$testSongId;
+$testSongId = '';
 $sharedAdded;
 $addtolib = '';
+$sng;
 		foreach($sharedSongs as $song){
 
 			$songId = $song->song_id;
 			$testSongId = $songId;
+			$sng = $song;
 
 			//Insert new playlist song on playlist id
 			$sharedSongsAdded = PlaylistSongs::insert(array(
@@ -139,7 +141,9 @@ $addtolib = '';
 			'addtolib'=>$addtolib,
 			'array'=>$addedSharedSongs,
 			'testsongid'=>$testSongId,
-			'sharedAddedtoPL'=>$sharedAdded
+			'sharedAddedtoPL'=>$sharedAdded,
+			'song_id'=>$sng,
+			'sharedSongs'=>$sharedSongs
 
 		);
 
