@@ -65,6 +65,8 @@ Route::get('search/{searchQuery}', 'SearchController@search');
 //Playlist routes==========================//
 Route::get('new-playlist/{userId}/{songId}/{playlistName}', 'PlaylistsController@newPlaylist');
 
+Route::get('add-shared-playlist/{userId}/{sharedPlaylistId}', 'PlaylistsController@addSharedPlaylist');
+
 Route::get('get-playlist-songs/{playlistId}', 'PlaylistsController@getPlaylistSongs');
 
 Route::get('get-playlists/{userId}', 'PlaylistsController@getPlaylists');

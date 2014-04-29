@@ -62,6 +62,87 @@ class PlaylistsController extends BaseController {
 
 
 
+	public function addSharedPlaylist($userId, $sharedPlaylistId)
+	{
+
+		$addedSharedSongs = array();
+
+		//Get Shared playlist on id
+		$getSharedPlaylist = Playlists::
+			where('id', '=', $sharedPlaylistId)
+			->get();
+
+		//Grab the playlist's name
+		$playlistName = $getSharedPlaylist[0]->name;
+
+
+
+		//Create a new playlist for user
+		$newPlaylist = Playlists::insert(array(
+			'name'		=>$playlistName,
+			'user_id'	=>$userId,
+			'acquired' 	=>'true'
+			));
+
+
+
+		//Get inserted playlist to retrieve id
+		$getPlaylistId = Playlists::
+			where('name', '=', $playlistName)
+			->where('user_id', '=', $userId)
+			->get();
+
+		//Store new playlist id
+		$playlistId= $getPlaylistId[0]->id;
+
+		//Generate share url
+		$shareUrl = $userId . '83027179269257243' . $playlistId;
+
+		//Add share url to new playlist entry
+		$addShareUrl = Playlists::where('id', '=', $playlistId)
+			->update(array(
+				'share_url'=>$shareUrl
+			));
+
+
+		//get Shared playlist songs & loop through inserting them into new playlist
+		//Get playlists on playlistId
+		$sharedSongs = Playlists::where('playlists.id', '=', $playlistId)
+								->where('playlist_songs.is_deleted', '=', NULL)
+								->join('playlist_songs', 'playlists.id', '=', 'playlist_songs.playlist_id')
+								->join('songs', 'songs.id', '=', 'playlist_songs.song_id')
+								->get();
+
+
+		for($sharedSongs as $song){
+
+			//Insert new playlist song on playlist id
+			$sharedSongsAdded = PlaylistSongs::insert(array(
+				'playlist_id'=>$playlistId,
+				'song_id'=>$song->song_id));
+
+			//Add song to array for return data
+			array_push($addedSharedSongs, $song->song_id);
+		}
+
+
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($addedSharedSongs);
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
