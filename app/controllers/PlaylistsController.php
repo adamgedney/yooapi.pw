@@ -116,7 +116,7 @@ class PlaylistsController extends BaseController {
 $testSongId = '';
 $sharedAdded ='';
 $addtolib = '';
-$sng;
+$sng = '';
 		foreach($sharedSongs as $song){
 
 			$songId = $song->song_id;
