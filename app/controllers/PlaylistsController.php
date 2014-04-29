@@ -134,13 +134,13 @@ $sharedAdded;
 			$addtolib = LibraryController::addToLibrary($songId, $userId);
 		}
 
-		$obj = {
+		$obj = array(
 			'addtolib'=>$addtolib,
 			'array'=>$addedSharedSongs,
 			'testsongid'=>$testSongId,
 			'sharedAddedtoPL'=>$sharedAdded
 
-		}
+		);
 
 
 
