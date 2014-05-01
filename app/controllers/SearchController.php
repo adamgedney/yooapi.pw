@@ -208,7 +208,7 @@ class SearchController extends BaseController {
 		$thisVideo = json_decode($youtubeIdExists, true);
 
 
-			//If itunes result does NOT exist
+			//If itunes result does NOT exist, insert video anyway
 			if(!isset($getLocalItunes[$index])){
 
 				//Only insert unique videos
@@ -400,7 +400,6 @@ class SearchController extends BaseController {
 				//==========================================//
 				//Merge & Insert Song
 				//==========================================//
-
 
 				//If video has been inserted, update its info where available
 				if(isset($thisVideo[0])){
