@@ -86,8 +86,9 @@ class PlaylistsController extends BaseController {
 							->count();
 
 
-
-		//IF PLAYLIST IS NEW TO USER=============//
+//**NOTE
+		//IF PLAYLIST IS NEW TO USER======(prevents duplicate adds)=======//
+		//Problem. if 1 user changes playlist then reshares this user can't receive it again.
 		if($checkSharedList == "0"){
 
 			//Create a new playlist for current user
@@ -139,7 +140,7 @@ class PlaylistsController extends BaseController {
 
 				//Add song to array for return data
 				array_push($addedSharedSongs, $songId);
-
+//Note**   User may not want songs added to library
 				//Add song to library
 				$addtolib = LibraryController::addToLibrary($songId, $userId);
 			}//foreach

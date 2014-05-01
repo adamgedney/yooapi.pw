@@ -176,7 +176,7 @@ class SearchController extends BaseController {
 		//Loop through each YOUTUBE RESULT & passinto assumptions engine
 		foreach(json_decode($getLocalYouTube) as $youtubeItem){
 
-			$this->assumptionsEngine($getLocalItunes, $youtubeItem, $q);
+			$this->assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q);
 		}
 	}
 
@@ -186,24 +186,7 @@ class SearchController extends BaseController {
 
 
 	//Primary data analyzer & merger.
-	public function assumptionsEngine($getLocalItunes, $youtubeItem, $q){
-
-		//this runs 50 times. FOr each youtube video
-		//I need o run through each itunes result and stuff merge into DB
-		//If itunes result is 3, then I need to run 47 more times.
-
-		//1. get length of itunes results
-		//2. calculate difference
-		//3. run for loop 50 times
-		//if 3 itunes results, run all 3 over each video
-		//if zero results, just push youtube into DB w/out merge data
-		//Is this function already doing that?
-		//hmmmm
-
-		//=========================//
-		//Try writing a for loop. If itunes results length != to youtube results
-		//run for loop for itunes length, then just insert remaining youtube results
-		//into DB w/out enhanced data
+	public function assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q){
 
 		$song 	= ' ';
 		$artist = ' ';
@@ -216,215 +199,12 @@ class SearchController extends BaseController {
 		$albumLink 	= null;
 
 
-		//Loop through all ITUNES RESULTS
-		foreach($getLocalItunes as $songItem){
+		//Runs for each video
+		for($i=0;$i<count($getLocalYouTube);$i++){
 
-			$songFilter 		= $songItem->track_name;
-			$artistFilter 		= $songItem->artist_name;
-			$albumFilter 		= $songItem->collection_name;
-			$genreFilter 		= $songItem->primary_genre;
+			//If itunes result does NOT exist
+			if(!isset($getLocalItunes[$i])){
 
-			$itunesSongLink 	= $songItem->track_view_url;
-			$itunesArtistLink 	= $songItem->artist_view_url;
-			$itunesAlbumLink 	= $songItem->collection_view_url;
-
-
-			//Failsafe to ensure strpos doesn't crash
-			//when no album name present
-			if($albumFilter == ""){
-				$albumFilter = "http://yootunes.com";
-			}
-
-
-
-			//=======================Assumptions Engine=======================//
-			//Searches title and description of YouTbe result for additional metadata.
-			//Song titles and artists are not searched by description as
-			//Track lists could exist in descriptions. Album seems to be a
-			//safe search in description.
-			$songCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($songFilter));
-			$songCheckDesc 		= strpos(strtolower($youtubeItem->description), strtolower($songFilter));
-			$artistCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($artistFilter));
-			$artistCheckDesc 	= strpos(strtolower($youtubeItem->description), strtolower($artistFilter));
-			$albumCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($albumFilter));
-			$albumCheckDesc 	= strpos(strtolower($youtubeItem->description), strtolower($albumFilter));
-
-
-			//==========================================//
-			//Song Assumptions
-			//==========================================//
-
-			//Search YouTube TITLE for SONG name & ARTIST name
-			if($songCheckTitle !== false && $artistCheckTitle !== false){
-				$song 	= $songFilter;
-				$artist = $artistFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-			//Search YouTube TITLE for SONG name & ALBUM name
-			if($songCheckTitle !== false && $albumCheckTitle !== false){
-				$song 	= $songFilter;
-				$album 	= $albumFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-			//Search YouTube DESC for SONG name & ARTIST name
-			if($songCheckDesc !== false && $artistCheckDesc !== false){
-				$song 	= $songFilter;
-				$artist = $artistFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-			//Search YouTube DESC for SONG name & ALBUM name
-			if($songCheckDesc !== false && $albumCheckDesc !== false){
-				$song 	= $songFilter;
-				$album 	= $albumFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-			//Search YouTube TITLE for SONG name & DESC for ARTIST name
-			if($songCheckTitle !== false && $artistCheckDesc !== false){
-				$song 	= $songFilter;
-				$artist = $artistFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-			//Search YouTube TITLE for SONG name & DESC for ALBUM name
-			if($songCheckTitle !== false && $albumCheckDesc !== false){
-				$song 	= $songFilter;
-				$album 	= $albumFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to song
-				$songLink = $itunesSongLink;
-			}
-
-
-
-			//==========================================//
-			//Artist Assumptions
-			//==========================================//
-
-			//Search YouTube TITLE for ARTIST name string
-			if($artistCheckTitle !== false){
-				$artist = $artistFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to artist
-				$artistLink = $itunesArtistLink;
-			}
-
-			//Search YouTube DESC for ARTIST name string
-			if($artistCheckDesc !== false){
-				$artist = $artistFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to artist
-				$artistLink = $itunesArtistLink;
-			}
-
-
-
-
-			//==========================================//
-			//Album Assumptions
-			//==========================================//
-
-			//Search YouTube TITLE for ALBUM name string
-			if($albumCheckTitle !== false){
-				$album = $albumFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to album
-				$albumLink = $itunesAlbumLink;
-			}
-
-			//Search YouTube DESC for ALBUM name string
-			if($albumCheckDesc !== false){
-				$album = $albumFilter;
-				//Assumes genre
-				$genre 	= $genreFilter;
-
-				//Set the itunes link to album
-				$albumLink = $itunesAlbumLink;
-			}
-
-
-
-
-
-
-
-			//==========================================//
-			//Merge & Insert Song
-			//==========================================//
-
-			//Check for youtube_id in DB
-			$youtubeIdExists = Songs::where('youtube_id', '=', $youtubeItem->video_id)->get();
-
-			//Convert Model results to array
-			$thisVideo = json_decode($youtubeIdExists, true);
-
-			//If video has been inserted, update its info where available
-			if(isset($thisVideo[0])){
-
-				//Update SONG TITLE
-				if($thisVideo[0]["song_title"] == " " || $thisVideo[0]["song_title"] == NULL){
-
-					Songs::where('youtube_id', '=',$youtubeItem->video_id)
-					->update(array('song_title' => $song));
-				}
-
-				//Update ARTIST NAME
-				if($thisVideo[0]["artist"] == " " || $thisVideo[0]["artist"] == NULL){
-
-					Songs::where('youtube_id', '=',$youtubeItem->video_id)
-					->update(array('artist' => $artist));
-				}
-
-				//Update ALBUM NAME
-				if($thisVideo[0]["album"] == " " || $thisVideo[0]["album"] == NULL){
-
-					Songs::where('youtube_id', '=',$youtubeItem->video_id)
-					->update(array('album' => $album));
-				}
-
-				//Update GENRE
-				if($thisVideo[0]["genre"] == " " || $thisVideo[0]["genre"] == NULL){
-
-					Songs::where('youtube_id', '=',$youtubeItem->video_id)
-					->update(array('genre' => $genre));
-				}
-
-
-			}else{
-
-
-				//Insert
 				Songs::insert(array(
 					'query' 			=> $q,
 					'song_title' 		=> $song,
@@ -443,39 +223,238 @@ class SearchController extends BaseController {
 					'itunes_artist' 	=> $artistLink,
 					'itunes_album' 		=> $albumLink
 				));
-			}
-		}//foreach
+
+
+			}else{//For each itunes result, merge
+
+
+				$songFilter 		= $getLocalItunes[$i]->track_name;
+				$artistFilter 		= $getLocalItunes[$i]->artist_name;
+				$albumFilter 		= $getLocalItunes[$i]->collection_name;
+				$genreFilter 		= $getLocalItunes[$i]->primary_genre;
+
+				$itunesSongLink 	= $getLocalItunes[$i]->track_view_url;
+				$itunesArtistLink 	= $getLocalItunes[$i]->artist_view_url;
+				$itunesAlbumLink 	= $getLocalItunes[$i]->collection_view_url;
+
+
+				//Failsafe to ensure strpos doesn't crash
+				//when no album name present
+				if($albumFilter == ""){
+					$albumFilter = "http://yootunes.com";
+				}
 
 
 
-		//if get local itunes is empty
-		//add youtube results to songs list anyway
-		//this improves the uniqueness of songs in DB
+				//=======================Assumptions Engine=======================//
+				//Searches title and description of YouTbe result for additional metadata.
+				//Song titles and artists are not searched by description as
+				//Track lists could exist in descriptions. Album seems to be a
+				//safe search in description.
+				$songCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($songFilter));
+				$songCheckDesc 		= strpos(strtolower($youtubeItem->description), strtolower($songFilter));
+				$artistCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($artistFilter));
+				$artistCheckDesc 	= strpos(strtolower($youtubeItem->description), strtolower($artistFilter));
+				$albumCheckTitle 	= strpos(strtolower($youtubeItem->title), strtolower($albumFilter));
+				$albumCheckDesc 	= strpos(strtolower($youtubeItem->description), strtolower($albumFilter));
 
-		$queryExists = Queries::where('id', '=', $q)
-								->count();
 
-		if(count($getLocalItunes) == "0" && $queryExists == "0"){
-			//Insert
-			Songs::insert(array(
-				'query' 			=> $q,
-				'song_title' 		=> $song,
-				'youtube_title' 	=> $youtubeItem->title,
-				'artist' 			=> $artist,
-				'album' 			=> $album,
-				'genre' 			=> $genre,
-				'description' 		=> $youtubeItem->description,
-				'youtube_id' 		=> $youtubeItem->video_id,
-				'img_default' 		=> $youtubeItem->img_default,
-				'img_medium' 		=> $youtubeItem->img_medium,
-				'img_high' 			=> $youtubeItem->img_high,
-				'length' 			=> $length,
-				'youtube_results_id'=> $youtubeItem->id,
-				'itunes_song' 		=> $songLink,
-				'itunes_artist' 	=> $artistLink,
-				'itunes_album' 		=> $albumLink
-			));
-		}
+				//==========================================//
+				//Song Assumptions
+				//==========================================//
+
+				//Search YouTube TITLE for SONG name & ARTIST name
+				if($songCheckTitle !== false && $artistCheckTitle !== false){
+					$song 	= $songFilter;
+					$artist = $artistFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+				//Search YouTube TITLE for SONG name & ALBUM name
+				if($songCheckTitle !== false && $albumCheckTitle !== false){
+					$song 	= $songFilter;
+					$album 	= $albumFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+				//Search YouTube DESC for SONG name & ARTIST name
+				if($songCheckDesc !== false && $artistCheckDesc !== false){
+					$song 	= $songFilter;
+					$artist = $artistFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+				//Search YouTube DESC for SONG name & ALBUM name
+				if($songCheckDesc !== false && $albumCheckDesc !== false){
+					$song 	= $songFilter;
+					$album 	= $albumFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+				//Search YouTube TITLE for SONG name & DESC for ARTIST name
+				if($songCheckTitle !== false && $artistCheckDesc !== false){
+					$song 	= $songFilter;
+					$artist = $artistFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+				//Search YouTube TITLE for SONG name & DESC for ALBUM name
+				if($songCheckTitle !== false && $albumCheckDesc !== false){
+					$song 	= $songFilter;
+					$album 	= $albumFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to song
+					$songLink = $itunesSongLink;
+				}
+
+
+
+				//==========================================//
+				//Artist Assumptions
+				//==========================================//
+
+				//Search YouTube TITLE for ARTIST name string
+				if($artistCheckTitle !== false){
+					$artist = $artistFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to artist
+					$artistLink = $itunesArtistLink;
+				}
+
+				//Search YouTube DESC for ARTIST name string
+				if($artistCheckDesc !== false){
+					$artist = $artistFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to artist
+					$artistLink = $itunesArtistLink;
+				}
+
+
+
+
+				//==========================================//
+				//Album Assumptions
+				//==========================================//
+
+				//Search YouTube TITLE for ALBUM name string
+				if($albumCheckTitle !== false){
+					$album = $albumFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to album
+					$albumLink = $itunesAlbumLink;
+				}
+
+				//Search YouTube DESC for ALBUM name string
+				if($albumCheckDesc !== false){
+					$album = $albumFilter;
+					//Assumes genre
+					$genre 	= $genreFilter;
+
+					//Set the itunes link to album
+					$albumLink = $itunesAlbumLink;
+				}
+
+
+
+
+
+
+
+				//==========================================//
+				//Merge & Insert Song
+				//==========================================//
+
+				//Check for youtube_id in DB
+				$youtubeIdExists = Songs::where('youtube_id', '=', $youtubeItem->video_id)->get();
+
+				//Convert Model results to array
+				$thisVideo = json_decode($youtubeIdExists, true);
+
+				//If video has been inserted, update its info where available
+				if(isset($thisVideo[0])){
+
+					//Update SONG TITLE
+					if($thisVideo[0]["song_title"] == " " || $thisVideo[0]["song_title"] == NULL){
+
+						Songs::where('youtube_id', '=',$youtubeItem->video_id)
+						->update(array('song_title' => $song));
+					}
+
+					//Update ARTIST NAME
+					if($thisVideo[0]["artist"] == " " || $thisVideo[0]["artist"] == NULL){
+
+						Songs::where('youtube_id', '=',$youtubeItem->video_id)
+						->update(array('artist' => $artist));
+					}
+
+					//Update ALBUM NAME
+					if($thisVideo[0]["album"] == " " || $thisVideo[0]["album"] == NULL){
+
+						Songs::where('youtube_id', '=',$youtubeItem->video_id)
+						->update(array('album' => $album));
+					}
+
+					//Update GENRE
+					if($thisVideo[0]["genre"] == " " || $thisVideo[0]["genre"] == NULL){
+
+						Songs::where('youtube_id', '=',$youtubeItem->video_id)
+						->update(array('genre' => $genre));
+					}
+
+
+				}else{
+
+
+					//Insert
+					Songs::insert(array(
+						'query' 			=> $q,
+						'song_title' 		=> $song,
+						'youtube_title' 	=> $youtubeItem->title,
+						'artist' 			=> $artist,
+						'album' 			=> $album,
+						'genre' 			=> $genre,
+						'description' 		=> $youtubeItem->description,
+						'youtube_id' 		=> $youtubeItem->video_id,
+						'img_default' 		=> $youtubeItem->img_default,
+						'img_medium' 		=> $youtubeItem->img_medium,
+						'img_high' 			=> $youtubeItem->img_high,
+						'length' 			=> $length,
+						'youtube_results_id'=> $youtubeItem->id,
+						'itunes_song' 		=> $songLink,
+						'itunes_artist' 	=> $artistLink,
+						'itunes_album' 		=> $albumLink
+					));
+				}
+			}//else !isset($getLocalItunes[$i])
+		}//for count($getLocalYouTube)
 	}
 
 
