@@ -201,7 +201,7 @@ class SearchController extends BaseController {
 
 		//Runs for each video
 		for($i=0;$i<count($getLocalYouTube);$i++){
-
+echo $getLocalItunes[$i];
 			//If itunes result does NOT exist
 			if(!isset($getLocalItunes[$i])){
 
