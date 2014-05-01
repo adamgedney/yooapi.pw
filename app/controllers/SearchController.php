@@ -133,7 +133,7 @@ class SearchController extends BaseController {
 		//Step 7. –Return query results to client via song table
 		//===============================================//
 
-		$getSongs = $this->getSongs($searchQuery);
+		$getSongs = $this->getSongs($searchQuery, $q);
 
 
 		header('Access-Control-Allow-Origin: *');
@@ -620,12 +620,13 @@ class SearchController extends BaseController {
 
 
 
-	public function getSongs($query){
+	public function getSongs($query, $q){
 
 
 		//Get songs form songs table where artist, album,
 		//song_title, or genre match the client query
 		$getSongs = Songs::where('song_title', 'LIKE', '%' . $query . '%')
+			->orWhere('query', '=', $q)
 			->orWhere('youtube_title', 'LIKE', '%' . $query . '%')
 			->orWhere('artist', 'LIKE', '%' . $query . '%')
 			->orWhere('album', 'LIKE', '%' . $query . '%')
