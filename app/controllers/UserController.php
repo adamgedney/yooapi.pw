@@ -62,22 +62,23 @@ class UserController extends BaseController {
 					->where('is_deleted', '=', 'false')
 					->count();
 
-		// //If user exists, get id
-		// if($user !== "0"){
+		//If user exists, get id
+		if($user !== "0"){
 
-		// 	//Fetch current user to begin building their acct
-		// 	$userObj = User::where('email', "=", $email)
-		// 			->where('password', "=", $pw)
-		// 			->where('is_deleted', '=', 'false')
-		// 			->get();
+			//Fetch current user to begin building their acct
+			$userObj = User::where('email', "=", $email)
+					->where('password', "=", $pw)
+					->where('is_deleted', '=', 'false')
+					->get();
 
-		// 	$userId 	= $userObj[0]->id;
-		// 	$userTheme 	= $userObj[0]->theme;
-		// 	$success 	= true;
+			$userId 	= $userObj[0]->id;
+			$userTheme 	= $userObj[0]->theme;
+			$success 	= true;
 
 
 
-		// }else{//If user check failed, check to see if user is deleted
+		}
+		//else{//If user check failed, check to see if user is deleted
 
 
 		// 	$restoreUser = User::where('email', "=", $email)
