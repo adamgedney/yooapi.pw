@@ -49,7 +49,7 @@ class UserController extends BaseController {
 	{
 
 		$userId 	= "";
-		$userObj;
+		$userObj  	= "";
 		$userTheme 	= "";
 		$success 	= false;
 		$restorable = false;
