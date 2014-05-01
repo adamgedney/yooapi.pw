@@ -77,36 +77,35 @@ class UserController extends BaseController {
 
 
 
+		}else{//If user check failed, check to see if user is deleted
+
+
+			$restoreUser = User::where('email', "=", $email)
+					->where('password', "=", $pw)
+					->where('is_deleted', '=', 'true')
+					->count();
+
+			//If user exists, but has previously deleted
+			//account, announce user as restorable
+			if($restoreUser !== "0"){
+				$restorable = true;
+			}
 		}
-		//else{//If user check failed, check to see if user is deleted
 
 
-		// 	$restoreUser = User::where('email', "=", $email)
-		// 			->where('password', "=", $pw)
-		// 			->where('is_deleted', '=', 'true')
-		// 			->count();
-
-		// 	//If user exists, but has previously deleted
-		// 	//account, announce user as restorable
-		// 	if($restoreUser !== "0"){
-		// 		$restorable = true;
-		// 	}
-		// }
-
-
-		// //Return object
-		// $obj = array(
-		// 	json_decode($userObj, true),
-		// 	'success'	=>$success,
-		// 	'userId'	=>$userId,
-		// 	'email'		=>$email,
-		// 	'restorable'=>$restorable,
-		// 	'theme' 	=>$userTheme
-		// );
+		//Return object
+		$obj = array(
+			json_decode($userObj, true),
+			'success'	=>$success,
+			'userId'	=>$userId,
+			'email'		=>$email,
+			'restorable'=>$restorable,
+			'theme' 	=>$userTheme
+		);
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($user);
+		return Response::json($obj);
 	}
 
 
