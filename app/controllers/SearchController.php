@@ -201,29 +201,38 @@ class SearchController extends BaseController {
 		$artistLink = null;
 		$albumLink 	= null;
 
+		//Check for youtube_id in DB
+		$youtubeIdExists = Songs::where('youtube_id', '=', $youtubeItem->video_id)->get();
+
+		//Convert Model results to array
+		$thisVideo = json_decode($youtubeIdExists, true);
 
 
 			//If itunes result does NOT exist
 			if(!isset($getLocalItunes[$index])){
 
-				Songs::insert(array(
-					'query' 			=> $q,
-					'song_title' 		=> $song,
-					'youtube_title' 	=> $youtubeItem->title,
-					'artist' 			=> $artist,
-					'album' 			=> $album,
-					'genre' 			=> $genre,
-					'description' 		=> $youtubeItem->description,
-					'youtube_id' 		=> $youtubeItem->video_id,
-					'img_default' 		=> $youtubeItem->img_default,
-					'img_medium' 		=> $youtubeItem->img_medium,
-					'img_high' 			=> $youtubeItem->img_high,
-					'length' 			=> $length,
-					'youtube_results_id'=> $youtubeItem->id,
-					'itunes_song' 		=> $songLink,
-					'itunes_artist' 	=> $artistLink,
-					'itunes_album' 		=> $albumLink
-				));
+				//Only insert unique videos
+				if(!isset($thisVideo[0])){
+
+					Songs::insert(array(
+						'query' 			=> $q,
+						'song_title' 		=> $song,
+						'youtube_title' 	=> $youtubeItem->title,
+						'artist' 			=> $artist,
+						'album' 			=> $album,
+						'genre' 			=> $genre,
+						'description' 		=> $youtubeItem->description,
+						'youtube_id' 		=> $youtubeItem->video_id,
+						'img_default' 		=> $youtubeItem->img_default,
+						'img_medium' 		=> $youtubeItem->img_medium,
+						'img_high' 			=> $youtubeItem->img_high,
+						'length' 			=> $length,
+						'youtube_results_id'=> $youtubeItem->id,
+						'itunes_song' 		=> $songLink,
+						'itunes_artist' 	=> $artistLink,
+						'itunes_album' 		=> $albumLink
+					));
+				}
 
 
 			}else{//For each itunes result, merge
@@ -392,11 +401,6 @@ class SearchController extends BaseController {
 				//Merge & Insert Song
 				//==========================================//
 
-				//Check for youtube_id in DB
-				$youtubeIdExists = Songs::where('youtube_id', '=', $youtubeItem->video_id)->get();
-
-				//Convert Model results to array
-				$thisVideo = json_decode($youtubeIdExists, true);
 
 				//If video has been inserted, update its info where available
 				if(isset($thisVideo[0])){
