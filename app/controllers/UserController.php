@@ -87,7 +87,7 @@ class UserController extends BaseController {
 
 			//If user exists, but has previously deleted
 			//account, announce user as restorable
-			if($restoreUser !== "0"){
+			if($restoreUser !== 0){
 				$restorable = true;
 			}
 		}
