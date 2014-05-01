@@ -202,41 +202,41 @@ class SearchController extends BaseController {
 		$albumLink 	= null;
 
 
-
+echo $getLocalItunes;
 			//If itunes result does NOT exist
 			if(!isset($getLocalItunes[$index])){
 
-				Songs::insert(array(
-					'query' 			=> $q,
-					'song_title' 		=> $song,
-					'youtube_title' 	=> $youtubeItem->title,
-					'artist' 			=> $artist,
-					'album' 			=> $album,
-					'genre' 			=> $genre,
-					'description' 		=> $youtubeItem->description,
-					'youtube_id' 		=> $youtubeItem->video_id,
-					'img_default' 		=> $youtubeItem->img_default,
-					'img_medium' 		=> $youtubeItem->img_medium,
-					'img_high' 			=> $youtubeItem->img_high,
-					'length' 			=> $length,
-					'youtube_results_id'=> $youtubeItem->id,
-					'itunes_song' 		=> $songLink,
-					'itunes_artist' 	=> $artistLink,
-					'itunes_album' 		=> $albumLink
-				));
+				// Songs::insert(array(
+				// 	'query' 			=> $q,
+				// 	'song_title' 		=> $song,
+				// 	'youtube_title' 	=> $youtubeItem->title,
+				// 	'artist' 			=> $artist,
+				// 	'album' 			=> $album,
+				// 	'genre' 			=> $genre,
+				// 	'description' 		=> $youtubeItem->description,
+				// 	'youtube_id' 		=> $youtubeItem->video_id,
+				// 	'img_default' 		=> $youtubeItem->img_default,
+				// 	'img_medium' 		=> $youtubeItem->img_medium,
+				// 	'img_high' 			=> $youtubeItem->img_high,
+				// 	'length' 			=> $length,
+				// 	'youtube_results_id'=> $youtubeItem->id,
+				// 	'itunes_song' 		=> $songLink,
+				// 	'itunes_artist' 	=> $artistLink,
+				// 	'itunes_album' 		=> $albumLink
+				// ));
 
 
 			}else{//For each itunes result, merge
-echo $getLocalItunes[$index];
 
-				$songFilter 		= $getLocalItunes[$i]->track_name;
-				$artistFilter 		= $getLocalItunes[$i]->artist_name;
-				$albumFilter 		= $getLocalItunes[$i]->collection_name;
-				$genreFilter 		= $getLocalItunes[$i]->primary_genre;
 
-				$itunesSongLink 	= $getLocalItunes[$i]->track_view_url;
-				$itunesArtistLink 	= $getLocalItunes[$i]->artist_view_url;
-				$itunesAlbumLink 	= $getLocalItunes[$i]->collection_view_url;
+				$songFilter 		= $getLocalItunes[$index]->track_name;
+				$artistFilter 		= $getLocalItunes[$index]->artist_name;
+				$albumFilter 		= $getLocalItunes[$index]->collection_name;
+				$genreFilter 		= $getLocalItunes[$index]->primary_genre;
+
+				$itunesSongLink 	= $getLocalItunes[$index]->track_view_url;
+				$itunesArtistLink 	= $getLocalItunes[$index]->artist_view_url;
+				$itunesAlbumLink 	= $getLocalItunes[$index]->collection_view_url;
 
 
 				//Failsafe to ensure strpos doesn't crash
@@ -434,25 +434,25 @@ echo $getLocalItunes[$index];
 				}else{
 
 
-					//Insert
-					Songs::insert(array(
-						'query' 			=> $q,
-						'song_title' 		=> $song,
-						'youtube_title' 	=> $youtubeItem->title,
-						'artist' 			=> $artist,
-						'album' 			=> $album,
-						'genre' 			=> $genre,
-						'description' 		=> $youtubeItem->description,
-						'youtube_id' 		=> $youtubeItem->video_id,
-						'img_default' 		=> $youtubeItem->img_default,
-						'img_medium' 		=> $youtubeItem->img_medium,
-						'img_high' 			=> $youtubeItem->img_high,
-						'length' 			=> $length,
-						'youtube_results_id'=> $youtubeItem->id,
-						'itunes_song' 		=> $songLink,
-						'itunes_artist' 	=> $artistLink,
-						'itunes_album' 		=> $albumLink
-					));
+					// //Insert
+					// Songs::insert(array(
+					// 	'query' 			=> $q,
+					// 	'song_title' 		=> $song,
+					// 	'youtube_title' 	=> $youtubeItem->title,
+					// 	'artist' 			=> $artist,
+					// 	'album' 			=> $album,
+					// 	'genre' 			=> $genre,
+					// 	'description' 		=> $youtubeItem->description,
+					// 	'youtube_id' 		=> $youtubeItem->video_id,
+					// 	'img_default' 		=> $youtubeItem->img_default,
+					// 	'img_medium' 		=> $youtubeItem->img_medium,
+					// 	'img_high' 			=> $youtubeItem->img_high,
+					// 	'length' 			=> $length,
+					// 	'youtube_results_id'=> $youtubeItem->id,
+					// 	'itunes_song' 		=> $songLink,
+					// 	'itunes_artist' 	=> $artistLink,
+					// 	'itunes_album' 		=> $albumLink
+					// ));
 				}
 			}//else !isset($getLocalItunes[$i])
 	}
