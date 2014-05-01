@@ -206,29 +206,28 @@ class SearchController extends BaseController {
 			//If itunes result does NOT exist
 			if(!isset($getLocalItunes[$index])){
 
-				// Songs::insert(array(
-				// 	'query' 			=> $q,
-				// 	'song_title' 		=> $song,
-				// 	'youtube_title' 	=> $youtubeItem->title,
-				// 	'artist' 			=> $artist,
-				// 	'album' 			=> $album,
-				// 	'genre' 			=> $genre,
-				// 	'description' 		=> $youtubeItem->description,
-				// 	'youtube_id' 		=> $youtubeItem->video_id,
-				// 	'img_default' 		=> $youtubeItem->img_default,
-				// 	'img_medium' 		=> $youtubeItem->img_medium,
-				// 	'img_high' 			=> $youtubeItem->img_high,
-				// 	'length' 			=> $length,
-				// 	'youtube_results_id'=> $youtubeItem->id,
-				// 	'itunes_song' 		=> $songLink,
-				// 	'itunes_artist' 	=> $artistLink,
-				// 	'itunes_album' 		=> $albumLink
-				// ));
+				Songs::insert(array(
+					'query' 			=> $q,
+					'song_title' 		=> $song,
+					'youtube_title' 	=> $youtubeItem->title,
+					'artist' 			=> $artist,
+					'album' 			=> $album,
+					'genre' 			=> $genre,
+					'description' 		=> $youtubeItem->description,
+					'youtube_id' 		=> $youtubeItem->video_id,
+					'img_default' 		=> $youtubeItem->img_default,
+					'img_medium' 		=> $youtubeItem->img_medium,
+					'img_high' 			=> $youtubeItem->img_high,
+					'length' 			=> $length,
+					'youtube_results_id'=> $youtubeItem->id,
+					'itunes_song' 		=> $songLink,
+					'itunes_artist' 	=> $artistLink,
+					'itunes_album' 		=> $albumLink
+				));
 
 
 			}else{//For each itunes result, merge
 
-var_dump($getLocalItunes[$index]);
 				$songFilter 		= $getLocalItunes[$index]->track_name;
 				$artistFilter 		= $getLocalItunes[$index]->artist_name;
 				$albumFilter 		= $getLocalItunes[$index]->collection_name;
@@ -434,25 +433,25 @@ var_dump($getLocalItunes[$index]);
 				}else{
 
 
-					// //Insert
-					// Songs::insert(array(
-					// 	'query' 			=> $q,
-					// 	'song_title' 		=> $song,
-					// 	'youtube_title' 	=> $youtubeItem->title,
-					// 	'artist' 			=> $artist,
-					// 	'album' 			=> $album,
-					// 	'genre' 			=> $genre,
-					// 	'description' 		=> $youtubeItem->description,
-					// 	'youtube_id' 		=> $youtubeItem->video_id,
-					// 	'img_default' 		=> $youtubeItem->img_default,
-					// 	'img_medium' 		=> $youtubeItem->img_medium,
-					// 	'img_high' 			=> $youtubeItem->img_high,
-					// 	'length' 			=> $length,
-					// 	'youtube_results_id'=> $youtubeItem->id,
-					// 	'itunes_song' 		=> $songLink,
-					// 	'itunes_artist' 	=> $artistLink,
-					// 	'itunes_album' 		=> $albumLink
-					// ));
+					//Insert
+					Songs::insert(array(
+						'query' 			=> $q,
+						'song_title' 		=> $song,
+						'youtube_title' 	=> $youtubeItem->title,
+						'artist' 			=> $artist,
+						'album' 			=> $album,
+						'genre' 			=> $genre,
+						'description' 		=> $youtubeItem->description,
+						'youtube_id' 		=> $youtubeItem->video_id,
+						'img_default' 		=> $youtubeItem->img_default,
+						'img_medium' 		=> $youtubeItem->img_medium,
+						'img_high' 			=> $youtubeItem->img_high,
+						'length' 			=> $length,
+						'youtube_results_id'=> $youtubeItem->id,
+						'itunes_song' 		=> $songLink,
+						'itunes_artist' 	=> $artistLink,
+						'itunes_album' 		=> $albumLink
+					));
 				}
 			}//else !isset($getLocalItunes[$i])
 	}
