@@ -202,7 +202,7 @@ class SearchController extends BaseController {
 		$albumLink 	= null;
 
 
-echo $getLocalItunes;
+
 			//If itunes result does NOT exist
 			if(!isset($getLocalItunes[$index])){
 
@@ -228,7 +228,7 @@ echo $getLocalItunes;
 
 			}else{//For each itunes result, merge
 
-
+var_dump($getLocalItunes[$index]);
 				$songFilter 		= $getLocalItunes[$index]->track_name;
 				$artistFilter 		= $getLocalItunes[$index]->artist_name;
 				$albumFilter 		= $getLocalItunes[$index]->collection_name;
