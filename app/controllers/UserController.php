@@ -62,50 +62,50 @@ class UserController extends BaseController {
 					->where('is_deleted', '=', 'false')
 					->count();
 
-		//If user exists, get id
-		if($user !== "0"){
+		// //If user exists, get id
+		// if($user !== "0"){
 
-			//Fetch current user to begin building their acct
-			$userObj = User::where('email', "=", $email)
-					->where('password', "=", $pw)
-					->where('is_deleted', '=', 'false')
-					->get();
+		// 	//Fetch current user to begin building their acct
+		// 	$userObj = User::where('email', "=", $email)
+		// 			->where('password', "=", $pw)
+		// 			->where('is_deleted', '=', 'false')
+		// 			->get();
 
-			$userId 	= $userObj[0]->id;
-			$userTheme 	= $userObj[0]->theme;
-			$success 	= true;
-
-
-
-		}else{//If user check failed, check to see if user is deleted
+		// 	$userId 	= $userObj[0]->id;
+		// 	$userTheme 	= $userObj[0]->theme;
+		// 	$success 	= true;
 
 
-			$restoreUser = User::where('email', "=", $email)
-					->where('password', "=", $pw)
-					->where('is_deleted', '=', 'true')
-					->count();
 
-			//If user exists, but has previously deleted
-			//account, announce user as restorable
-			if($restoreUser !== "0"){
-				$restorable = true;
-			}
-		}
+		// }else{//If user check failed, check to see if user is deleted
 
 
-		//Return object
-		$obj = array(
-			json_decode($userObj, true),
-			'success'	=>$success,
-			'userId'	=>$userId,
-			'email'		=>$email,
-			'restorable'=>$restorable,
-			'theme' 	=>$userTheme
-		);
+		// 	$restoreUser = User::where('email', "=", $email)
+		// 			->where('password', "=", $pw)
+		// 			->where('is_deleted', '=', 'true')
+		// 			->count();
+
+		// 	//If user exists, but has previously deleted
+		// 	//account, announce user as restorable
+		// 	if($restoreUser !== "0"){
+		// 		$restorable = true;
+		// 	}
+		// }
+
+
+		// //Return object
+		// $obj = array(
+		// 	json_decode($userObj, true),
+		// 	'success'	=>$success,
+		// 	'userId'	=>$userId,
+		// 	'email'		=>$email,
+		// 	'restorable'=>$restorable,
+		// 	'theme' 	=>$userTheme
+		// );
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($obj);
+		return Response::json($user);
 	}
 
 
