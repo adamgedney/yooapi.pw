@@ -173,10 +173,13 @@ class SearchController extends BaseController {
 
 	public function mergeData($getLocalItunes, $getLocalYouTube, $q){
 
+		$index = 0;
 		//Loop through each YOUTUBE RESULT & passinto assumptions engine
 		foreach(json_decode($getLocalYouTube) as $youtubeItem){
 
-			$this->assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q);
+			$this->assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q, $index);
+
+			$index++;
 		}
 	}
 
@@ -186,7 +189,7 @@ class SearchController extends BaseController {
 
 
 	//Primary data analyzer & merger.
-	public function assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q){
+	public function assumptionsEngine($getLocalYouTube, $getLocalItunes, $youtubeItem, $q, $index){
 
 		$song 	= ' ';
 		$artist = ' ';
@@ -199,11 +202,9 @@ class SearchController extends BaseController {
 		$albumLink 	= null;
 
 
-		//Runs for each video
-		for($i=0;$i<count($getLocalYouTube);$i++){
-echo $getLocalItunes[$i];
+
 			//If itunes result does NOT exist
-			if(!isset($getLocalItunes[$i])){
+			if(!isset($getLocalItunes[$index])){
 
 				Songs::insert(array(
 					'query' 			=> $q,
@@ -226,7 +227,7 @@ echo $getLocalItunes[$i];
 
 
 			}else{//For each itunes result, merge
-
+echo $getLocalItunes[$index];
 
 				$songFilter 		= $getLocalItunes[$i]->track_name;
 				$artistFilter 		= $getLocalItunes[$i]->artist_name;
@@ -454,7 +455,6 @@ echo $getLocalItunes[$i];
 					));
 				}
 			}//else !isset($getLocalItunes[$i])
-		}//for count($getLocalYouTube)
 	}
 
 
