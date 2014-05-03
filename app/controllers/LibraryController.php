@@ -69,7 +69,7 @@ class LibraryController extends BaseController {
 		$libraryId = Library::where('user_id', '=', $userId)
 		->get();
 
-		Check library for current song
+		//Check library for current song
 		$inLibrary = LibrarySongs::where('song_id', '=', $songId)
 									->where('library_id', '=', $libraryId[0]->id)
 									->count();
