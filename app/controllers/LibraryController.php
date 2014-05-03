@@ -69,26 +69,25 @@ class LibraryController extends BaseController {
 		$libraryId = Library::where('user_id', '=', $userId)
 		->get();
 
-		//Check library for current song
-		// $inLibrary = LibrarySongs::where('song_id', '=', $songId)
-		// 							->where('library_id', '=', $libraryId[0]->id)
-		// 							->count();
+		Check library for current song
+		$inLibrary = LibrarySongs::where('song_id', '=', $songId)
+									->where('library_id', '=', $libraryId[0]->id)
+									->count();
 
-		// //If song is NOT in THIS USER'S library already, insert
-		// if($inLibrary === 0){
+		//If song is NOT in THIS USER'S library already, insert
+		if($inLibrary === 0){
 
-		// 	//Insert song id into user songs paired to library id
-		// 	$librarySongs = LibrarySongs::insert(array(
-		// 		'song_id'	=>$songId,
-		// 		'library_id'=>$libraryId[0]->id));
-		// }
+			//Insert song id into user songs paired to library id
+			$librarySongs = LibrarySongs::insert(array(
+				'song_id'	=>$songId,
+				'library_id'=>$libraryId[0]->id));
+		}
 
 
 
 
 		header('Access-Control-Allow-Origin: *');
-		// return Response::json($librarySongs);
-		return Response::json($libraryId);
+		return Response::json($librarySongs);
 	}
 
 
