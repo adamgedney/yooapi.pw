@@ -70,9 +70,9 @@ class LibraryController extends BaseController {
 		->get();
 
 		//Check library for current song
-		$inLibrary = LibrarySongs::where('song_id', '=', $songId)
-									->where('library_id', '=', $libraryId[0]->id)
-									->count();
+		// $inLibrary = LibrarySongs::where('song_id', '=', $songId)
+		// 							->where('library_id', '=', $libraryId[0]->id)
+		// 							->count();
 
 		// //If song is NOT in THIS USER'S library already, insert
 		// if($inLibrary === 0){
@@ -88,7 +88,7 @@ class LibraryController extends BaseController {
 
 		header('Access-Control-Allow-Origin: *');
 		// return Response::json($librarySongs);
-		return Response::json($libraryId[0]);
+		return Response::json($libraryId);
 	}
 
 
