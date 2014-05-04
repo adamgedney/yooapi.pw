@@ -558,7 +558,7 @@ class SearchController extends BaseController {
 	public function getItunes($q, $query, $maxResults){
 
 		//Itunes API key
-		$ITUNES_AFFILIATE_URL = '';
+		$AFF_ID = '';
 		$LIMIT = $maxResults;
 
 		//Format string to strip spaces and add "+"
@@ -587,9 +587,9 @@ class SearchController extends BaseController {
 					'artist_name'				=>(empty($result["artistName"]))				? " " : $result["artistName"],
 					'collection_name'			=>(empty($result["collectionName"]))			? " " : $result["collectionName"],
 					'track_name'				=>(empty($result["trackName"]))					? " " : $result["trackName"],
-					'artist_view_url'			=>(empty($result["artistViewUrl"]))				? " " : $result["artistViewUrl"],
-					'collection_view_url'		=>(empty($result["collectionViewUrl"]))			? " " : $result["collectionViewUrl"],
-					'track_view_url'			=>(empty($result["trackViewUrl"]))				? " " : $result["trackViewUrl"],
+					'artist_view_url'			=>(empty($result["artistViewUrl"]))				? " " : $result["artistViewUrl"] . "&at=" . $AFF_ID,
+					'collection_view_url'		=>(empty($result["collectionViewUrl"]))			? " " : $result["collectionViewUrl"] . "&at=" . $AFF_ID,
+					'track_view_url'			=>(empty($result["trackViewUrl"]))				? " " : $result["trackViewUrl"] . "&at=" . $AFF_ID,
 					'img_30'					=>(empty($result["artworkUrl30"]))				? " " : $result["artworkUrl30"],
 					'img_60'					=>(empty($result["artworkUrl60"]))				? " " : $result["artworkUrl60"],
 					'img_100'					=>(empty($result["artworkUrl100"]))				? " " : $result["artworkUrl100"],
