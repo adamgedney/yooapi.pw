@@ -25,7 +25,7 @@ class LibraryController extends BaseController {
 		}
 
 		//Fetches user library
-		if($limit === 0){
+		if($limit === "0"){
 
 			$library = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
