@@ -8,9 +8,9 @@ class LibraryController extends BaseController {
 
 
 
-	public function getLibrary($id, $sortBy, $sortOrder, $page)
+	public function getLibrary($id, $sortBy, $sortOrder, $page, $limit)
 	{
-		$limit = 50;
+
 
 		$libraryCount = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
@@ -25,14 +25,26 @@ class LibraryController extends BaseController {
 		}
 
 		//Fetches user library
-		$library = Library::where('user_id', '=', $id)
+		if($limit === 0){
+
+			$library = Library::where('user_id', '=', $id)
 							->where('is_deleted', '=', NULL)
 							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
 							->join('songs', 'songs.id', '=', 'library_songs.song_id')
 							->orderBy($sortBy, $sortOrder)
-							->take($limit)
-							->skip((int)$page)
 							->get();
+		}else{
+
+
+			$library = Library::where('user_id', '=', $id)
+								->where('is_deleted', '=', NULL)
+								->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+								->join('songs', 'songs.id', '=', 'library_songs.song_id')
+								->orderBy($sortBy, $sortOrder)
+								->take($limit)
+								->skip((int)$page)
+								->get();
+		}
 
 
 		$obj = array(
