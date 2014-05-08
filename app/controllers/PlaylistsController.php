@@ -219,10 +219,24 @@ class PlaylistsController extends BaseController {
 	public function addToPlaylist($songId, $playlistId)
 	{
 
-		//Insert new song into playlist
-		$addToPlaylist = PlaylistSongs::insert(array(
-			'playlist_id'=>$playlistId,
-			'song_id'=>$songId));
+		$addToPlaylist;
+
+		$songExists = PlaylistSongs::where('playlist_id', '=', $playlistId)
+					->where('song_id', '=', $songId)
+					->count();
+
+
+		//Only add to playlist if song is not already in it
+		if($songExists === '0'){
+
+			//Insert new song into playlist
+			$addToPlaylist = PlaylistSongs::insert(array(
+				'playlist_id'=>$playlistId,
+				'song_id'=>$songId));
+		}else{
+			$addToPlaylist = "Song already exists in playlist";
+		}
+
 
 
 
