@@ -227,7 +227,7 @@ class PlaylistsController extends BaseController {
 
 
 		//Only add to playlist if song is not already in it
-		if($songExists === '0'){
+		if($songExists == '0'){
 
 			//Insert new song into playlist
 			$addToPlaylist = PlaylistSongs::insert(array(
