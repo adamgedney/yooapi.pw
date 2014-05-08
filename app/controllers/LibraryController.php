@@ -8,7 +8,7 @@ class LibraryController extends BaseController {
 
 
 
-	public function getLibrary($id, $sortBy, $sortOrder, $page, $limit)
+	public function getLibrary($id)
 	{
 
 
@@ -18,40 +18,20 @@ class LibraryController extends BaseController {
 							->count();
 
 
-		//Defaults sort order if none present
-		if($sortBy === 'def' || $sortOrder === 'def'){
-			$sortBy 	= 'library_songs.created_at';
-			$sortOrder 	= 'DESC';
-		}
-
-		//Fetches user library
-		if($limit === "0"){
-
-			$library = Library::where('user_id', '=', $id)
-							->where('is_deleted', '=', NULL)
-							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
-							->join('songs', 'songs.id', '=', 'library_songs.song_id')
-							->orderBy($sortBy, $sortOrder)
-							->get();
-		}else{
 
 
-			$library = Library::where('user_id', '=', $id)
-								->where('is_deleted', '=', NULL)
-								->join('library_songs', 'library.id', '=', 'library_songs.library_id')
-								->join('songs', 'songs.id', '=', 'library_songs.song_id')
-								->orderBy($sortBy, $sortOrder)
-								->take($limit)
-								->skip((int)$page)
-								->get();
-		}
+		$library = Library::where('user_id', '=', $id)
+						->where('is_deleted', '=', NULL)
+						->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+						->join('songs', 'songs.id', '=', 'library_songs.song_id')
+						->orderBy($sortBy, $sortOrder)
+						->get();
+
 
 
 		$obj = array(
 			json_decode($library, true),
-			'count'		=>$libraryCount,
-			'limit'  	=>$limit,
-			'skip' 		=>(int)$page
+			'count'		=>$libraryCount
 		);
 
 
@@ -59,6 +39,27 @@ class LibraryController extends BaseController {
 
 		header('Access-Control-Allow-Origin: *');
 		return Response::json($obj);
+	}
+
+
+
+
+
+
+
+
+
+
+	public function getLibraryCount($id)
+	{
+
+		$libraryCount = Library::where('user_id', '=', $id)
+							->where('is_deleted', '=', NULL)
+							->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+							->count();
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($libraryCount);
 	}
 
 
