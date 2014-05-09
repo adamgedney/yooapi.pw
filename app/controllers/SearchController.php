@@ -6,7 +6,7 @@ class SearchController extends BaseController {
 
 
 
-	public function search($searchQuery){
+	public function search($searchQuery, $userId){
 
 		//===================//
 		//Begin search cascade
@@ -53,6 +53,17 @@ class SearchController extends BaseController {
 
 			$q = $getQuery[0]->id;
 		}
+
+
+		//=======================//
+		//Log the user's query
+		//=======================//
+		UserQueries::insert(array(
+			'user_id'=>$userId,
+			'query_id'=>$q));
+
+
+
 
 
 		//===============================================//
