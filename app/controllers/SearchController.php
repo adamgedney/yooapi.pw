@@ -657,7 +657,7 @@ class SearchController extends BaseController {
 	public function getSearchHistory($userId, $characters){
 
 		$searchHistory = UserQueries::where('user_id', '=', $userId)
-									->orderBy('created_at', 'DESC')
+									->orderBy('user_queries.created_at', 'DESC')
 									->join('queries', 'queries.id', '=', 'user_queries.query_id')
 									->where('queries.query', 'LIKE', $characters . '%')
 									->take(10)
