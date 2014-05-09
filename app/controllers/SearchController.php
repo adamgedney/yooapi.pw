@@ -654,6 +654,26 @@ class SearchController extends BaseController {
 
 
 
+	public function getSearchHistory($userId){
+
+		$searchHistory = UserQueries::where('user_id', '=', $userId)
+									->take(10)
+									->get();
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($searchHistory);
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 
