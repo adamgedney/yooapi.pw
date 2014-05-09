@@ -657,6 +657,7 @@ class SearchController extends BaseController {
 	public function getSearchHistory($userId){
 
 		$searchHistory = UserQueries::where('user_id', '=', $userId)
+									->orderBy('created_at', 'DESC')
 									->take(10)
 									->get();
 
