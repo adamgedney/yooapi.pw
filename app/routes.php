@@ -59,7 +59,7 @@ Route::get('delete-device/{deviceId}', 'UserController@deleteDevice');
 //Search routes===========================//
 Route::get('search/{searchQuery}/{userId}', 'SearchController@search');
 
-Route::get('get-search-history/{userId}', 'SearchController@getSearchHistory');
+Route::get('get-search-history/{userId}/{characters}', 'SearchController@getSearchHistory');
 
 
 
