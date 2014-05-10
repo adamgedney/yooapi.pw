@@ -34,7 +34,7 @@ class PlaylistsController extends BaseController {
 
 		//Store new playlist id
 
-			$playlistId = $getPlaylistId[0]->id;
+			$playlistId = $getPlaylistId[0]['id'];
 
 			//Generate share url
 			$shareUrl = $userId . '83027179269257243' . $playlistId;
