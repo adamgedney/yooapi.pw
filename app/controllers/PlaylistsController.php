@@ -33,7 +33,6 @@ class PlaylistsController extends BaseController {
 		$getPlaylistId = json_decode($thisList, true);
 
 		//Store new playlist id
-		if(!isset($getPlaylistId[0])){
 
 			$playlistId = $getPlaylistId[0]->id;
 
@@ -56,12 +55,6 @@ class PlaylistsController extends BaseController {
 			}else{
 
 			}
-
-
-		}else{
-			// $getPlaylistId = "error: Playlist not returned";
-		}
-
 
 
 
