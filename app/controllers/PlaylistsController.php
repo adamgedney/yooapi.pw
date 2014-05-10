@@ -58,7 +58,7 @@ class PlaylistsController extends BaseController {
 
 
 		}else{
-			$getPlaylistId = "error: Playlist not returned";
+			// $getPlaylistId = "error: Playlist not returned";
 		}
 
 
