@@ -28,24 +28,24 @@ class PlaylistsController extends BaseController {
 			->where('user_id', '=', $userId)
 			->get();
 
-		//Store new playlist id
-		$playlistId= $getPlaylistId[0]->id;
+		// //Store new playlist id
+		// $playlistId= $getPlaylistId[0]->id;
 
-		//Generate share url
-		$shareUrl = $userId . '83027179269257243' . $playlistId;
+		// //Generate share url
+		// $shareUrl = $userId . '83027179269257243' . $playlistId;
 
-		//Add share url to new playlist entry
-		$addShareUrl = Playlists::where('id', '=', $playlistId)
-			->update(array(
-				'share_url'=>$shareUrl
-			));
+		// //Add share url to new playlist entry
+		// $addShareUrl = Playlists::where('id', '=', $playlistId)
+		// 	->update(array(
+		// 		'share_url'=>$shareUrl
+		// 	));
 
 
 
-		//Insert new playlist song on playlist id
-		$newplaylistSong = PlaylistSongs::insert(array(
-			'playlist_id'=>$playlistId,
-			'song_id'=>$songId));
+		// //Insert new playlist song on playlist id
+		// $newplaylistSong = PlaylistSongs::insert(array(
+		// 	'playlist_id'=>$playlistId,
+		// 	'song_id'=>$songId));
 
 
 
