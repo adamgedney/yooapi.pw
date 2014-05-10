@@ -313,6 +313,32 @@ class PlaylistsController extends BaseController {
 
 
 
+	public function renamePlaylist($playlistId, $newName)
+	{
+
+		//Marks playlist as deleted
+		$renamePlaylist = Playlists::where('id', '=', $playlistId)
+									->update(array(
+									'name'=>$newName));
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($renamePlaylist);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//Return URL to retrieve a playlist
 	//Mark playlist as public w/ is_shared
 	//Build URL w/ username and playlist id

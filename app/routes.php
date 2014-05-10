@@ -79,6 +79,8 @@ Route::get('delete-from-playlist/{songId}/{playlistId}', 'PlaylistsController@de
 
 Route::get('delete-playlist/{playlistId}', 'PlaylistsController@deletePlaylist');
 
+Route::get('rename-playlist/{playlistId}/{newName}', 'PlaylistsController@renamePlaylist');
+
 // Route::get('share-playlist', 'PlaylistsController@sharePlaylist');
 
 
