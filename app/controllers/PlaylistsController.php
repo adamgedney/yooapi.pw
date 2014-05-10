@@ -25,11 +25,12 @@ class PlaylistsController extends BaseController {
 
 
 		//Get inserted playlist to retrieve id
-		$getPlaylistId = Playlists::
+		 $thisList = Playlists::
 			where('name', '=', $playlistName)
 			->where('user_id', '=', $userId)
 			->get();
 
+		$getPlaylistId = json_decode($thisList, true);
 
 		//Store new playlist id
 		if(!isset($getPlaylistId[0])){
