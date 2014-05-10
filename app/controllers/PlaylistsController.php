@@ -50,8 +50,9 @@ class PlaylistsController extends BaseController {
 			$newplaylistSong = PlaylistSongs::insert(array(
 				'playlist_id'=>$playlistId,
 				'song_id'=>$songId));
+
 		}else{
-			$newplaylistSong = "error: Playlist not returned"
+			$newplaylistSong = "error: Playlist not returned";
 		}
 
 
