@@ -13,7 +13,7 @@ class PlaylistsController extends BaseController {
 	public function newPlaylist($userId, $songId, $playlistName)
 	{
 
-		$getPlaylistId;
+		$playlistId;
 
 
 		//Create a new playlist for user
@@ -35,7 +35,7 @@ class PlaylistsController extends BaseController {
 		//Store new playlist id
 		if(!isset($getPlaylistId[0])){
 
-			$playlistId= $getPlaylistId[0]->id;
+			$playlistId = $getPlaylistId[0]->id;
 
 			//Generate share url
 			$shareUrl = $userId . '83027179269257243' . $playlistId;
@@ -66,7 +66,7 @@ class PlaylistsController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($getPlaylistId);
+		return Response::json($playlistId);
 	}
 
 
