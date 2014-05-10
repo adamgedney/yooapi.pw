@@ -13,7 +13,7 @@ class PlaylistsController extends BaseController {
 	public function newPlaylist($userId, $songId, $playlistName)
 	{
 
-		$newplaylistSong;
+		$getPlaylistId;
 
 
 		//Create a new playlist for user
@@ -33,6 +33,7 @@ class PlaylistsController extends BaseController {
 
 		//Store new playlist id
 		if(!isset($getPlaylistId[0])){
+
 			$playlistId= $getPlaylistId[0]->id;
 
 			//Generate share url
@@ -46,24 +47,25 @@ class PlaylistsController extends BaseController {
 
 
 
-			//Insert new playlist song on playlist id
-			$newplaylistSong = PlaylistSongs::insert(array(
-				'playlist_id'=>$playlistId,
-				'song_id'=>$songId));
+			if($songId !== "0"){
+				//Insert new playlist song on playlist id
+				$newplaylistSong = PlaylistSongs::insert(array(
+					'playlist_id'=>$playlistId,
+					'song_id'=>$songId));
+			}else{
+
+			}
+
 
 		}else{
-			$newplaylistSong = "error: Playlist not returned";
+			$getPlaylistId = "error: Playlist not returned";
 		}
 
-
-		$obj = array(
-			'newPlaylist'=>$newPlaylistSong,
-			'playlist'=>$getPlaylistId);
 
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($obj);
+		return Response::json($getPlaylistId);
 	}
 
 
