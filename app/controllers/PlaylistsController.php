@@ -50,7 +50,7 @@ class PlaylistsController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($newplaylistSong);
+		return Response::json($getPlaylistId);
 	}
 
 
