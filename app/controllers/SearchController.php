@@ -660,6 +660,7 @@ class SearchController extends BaseController {
 									->orderBy('user_queries.created_at', 'DESC')
 									->join('queries', 'queries.id', '=', 'user_queries.query_id')
 									->where('queries.query', 'LIKE', $characters . '%')
+									->distinct()
 									->take(10)
 									->get();
 
