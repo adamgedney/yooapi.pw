@@ -664,7 +664,7 @@ class SearchController extends BaseController {
 									->distinct()
 									->get();
 
-
+									$searchHistory = "balls";
 		header('Access-Control-Allow-Origin: *');
 		return Response::json($searchHistory);
 	}
