@@ -13,7 +13,7 @@ class UserController extends BaseController {
 			'registered_with'	=>$with,
 			'is_deleted'		=>'false',
 			'title' 			=> 'Mrs.',
-			'theme' 			=> 'light'
+			'theme' 			=> 'dark'
 		));
 
 
