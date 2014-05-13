@@ -21,6 +21,8 @@ Route::get('check-reset-token/{token}', 'UserController@checkResetToken');
 
 Route::get('reset-pass/{userId}/{password}', 'UserController@resetPassword');
 
+Route::get('settings-reset-pass/{userId}/{currentPass}/{password}', 'UserController@resetSettingsPassword');
+
 Route::get('restore-user/{email}/{pw}', 'UserController@restoreUser');
 
 Route::get('set-theme/{userId}/{theme}', 'UserController@setTheme');

@@ -383,6 +383,46 @@ class UserController extends BaseController {
 
 
 
+	public function resetSettingsPassword($userId, $currentPassword, $password){
+
+		$message;
+
+		$checkUser = User::where('id', '=', $userId)
+							->where('password', '=', $currentPassword)
+							->get();
+
+		if($checkUser !== "0"){
+			//update user table with new password
+			$updateUser = User::where('id', '=', $userId)
+								->update(array('password' => $password));
+				//Handle fails
+			if($updateUser){
+				$message = "Password reset success";
+			}else{
+				$message = "Failed password reset";
+			}
+		}else{
+			$message = "User doesn't exist" + $checkUser;
+		}
+
+
+
+
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($message);
+	}
+
+
+
+
+
+
+
+
+
 	public function restoreUser($email, $pw)
 	{
 
