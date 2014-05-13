@@ -386,7 +386,7 @@ class UserController extends BaseController {
 							->where('password', '=', $currentPassword)
 							->get();
 
-		if($checkUser !== "0"){
+		if(isset($checkUser[0])){
 			//update user table with new password
 			$updateUser = User::where('id', '=', $userId)
 								->update(array('password' => $password));
@@ -407,7 +407,7 @@ class UserController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($checkUser);
+		return Response::json($message);
 	}
 
 
