@@ -397,7 +397,7 @@ class UserController extends BaseController {
 				$message = "Failed password reset";
 			}
 		}else{
-			$message = "User doesn't exist" + $checkUser;
+			$message = "User doesn't exist";
 		}
 
 
@@ -407,7 +407,7 @@ class UserController extends BaseController {
 
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($message);
+		return Response::json($checkUser);
 	}
 
 
