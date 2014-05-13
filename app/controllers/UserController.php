@@ -215,7 +215,7 @@ class UserController extends BaseController {
 
 
 
-	public function updateUser($id, $title, $name, $email, $birthMonth, $birthDay, $birthYear, $password)
+	public function updateUser($id, $title, $name, $email, $birthMonth, $birthDay, $birthYear)
 	{
 
 
@@ -227,10 +227,6 @@ class UserController extends BaseController {
 			//If null replace with data already in DB
 			if($name == "0"){
 				$name = $user[0]->display_name;
-			}
-
-			if($password == "0"){
-				$password = $user[0]->password;
 			}
 
 			if($email == "0"){
@@ -250,8 +246,7 @@ class UserController extends BaseController {
 									'email'			=> $email,
 									'birthMonth'	=> $birthMonth,
 									'birthDay' 		=> $birthDay,
-									'birthYear' 	=> $birthYear,
-									'password'		=> $password
+									'birthYear' 	=> $birthYear
 								));
 
 
