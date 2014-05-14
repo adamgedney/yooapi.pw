@@ -689,7 +689,7 @@ class SearchController extends BaseController {
 		$itunes = "test";
 		// $itunesArray = array();
 		//Calls Model to search DB for query
-		$itunes = Itunes::select('collection_view_url')->where('collection_view_url', 'LIKE', '%uo=4')->get();
+		$itunes = Itunes::select('track_view_url')->where('track_view_url', 'LIKE', '%uo=4')->get();
 		// $itunes = Itunes::get();
 
 			// where('artist_view_url', 'LIKE', '%http%')
@@ -699,18 +699,18 @@ class SearchController extends BaseController {
 
 		foreach(json_decode($itunes) as $i){
 			// $artist = $i->artist_view_url;
-			$album = $i->collection_view_url;
-			// $track = $i->track_view_url;
+			// $album = $i->collection_view_url;
+			$track = $i->track_view_url;
 
 
 			// Itunes::where('artist_view_url', '=', $artist)
 			// ->update(array('artist_view_url'=>$artist . $aff));
 
-			Itunes::where('collection_view_url', '=', $album)
-			->update(array('collection_view_url'=>$album . $aff));
+			// Itunes::where('collection_view_url', '=', $album)
+			// ->update(array('collection_view_url'=>$album . $aff));
 
-			// Itunes::where('track_view_url', '=', $track)
-			// ->update(array('track_view_url'=>$track . $aff));
+			Itunes::where('track_view_url', '=', $track)
+			->update(array('track_view_url'=>$track . $aff));
 
 		}
 
