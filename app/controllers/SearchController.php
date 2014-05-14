@@ -688,9 +688,9 @@ class SearchController extends BaseController {
 		$aff = '1l3vkSc';
 		$itunesArray = array();
 
-		$itunes = Itunes::where('artist_view_url NOT LIKE "%' . $pre . '%"')
-				->orWhereRaw('collection_view_url NOT LIKE "%' . $pre . '%"')
-				->orWhereRaw('track_view_url NOT LIKE "%' . $pre . '%"')
+		$itunes = Itunes::whereRaw('artist_view_url NOT LIKE "%' . $pre . '%"')
+				// ->orWhereRaw('collection_view_url NOT LIKE "%' . $pre . '%"')
+				// ->orWhereRaw('track_view_url NOT LIKE "%' . $pre . '%"')
 				->get();
 
 
