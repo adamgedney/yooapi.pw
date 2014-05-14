@@ -684,17 +684,17 @@ class SearchController extends BaseController {
 
 	//Method to append my affiliate link to older database entries
 	public function fixAff(){
-		$pre = "uo=4";
+		$pre = "4";
 		$aff = '1l3vkSc';
 		$itunes = "test";
 		// $itunesArray = array();
 
-		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre . '%')
+		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre)
 				->get();
 
-		// $itunes = DB::select(DB::raw('select * from itunes_results WHERE artist_view_url NOT LIKE "%&at=" OR collection_view_url NOT LIKE "%&at=" OR track_view_url NOT LIKE "%&at="'));
 
-
+				// ->orWhere('collection_view_url', 'LIKE', '%uo=4')
+				// ->orWhere('track_view_url', 'LIKE', '%uo=4')
 
 		// foreach(json_decode($itunes) as $i){
 		// 	$artist = $i->artist_view_url;
