@@ -681,7 +681,7 @@ class UserController extends BaseController {
 		$header  = 'MIME-Version: 1.0' . "\r\n";
 		$header .= "Reply-To: " . $from . "\r\n";
 		$header .= "Return-Path: " . $from . "\r\n";
-		$header .= 'From: Yootunes.com <' . $from . '>' . "\r\n";
+		$header .= 'From: atomPlayer <' . $from . '>' . "\r\n";
 
 		$to = $email;
 		$subject = "Reset your atomplayer password";
