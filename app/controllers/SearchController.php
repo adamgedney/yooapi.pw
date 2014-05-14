@@ -700,13 +700,13 @@ class SearchController extends BaseController {
 
 
 			Itunes::where('artist_view_url', '=', $artist)
-			->update('artist_view_url'=>$artist . $aff);
+			->update(array('artist_view_url'=>$artist . $aff));
 
 			Itunes::where('collection_view_url', '=', $album)
-			->update('collection_view_url'=>$album . $aff);
+			->update(array('collection_view_url'=>$album . $aff));
 
 			Itunes::where('track_view_url', '=', $track)
-			->update('track_view_url'=>$track . $aff);
+			->update(array('track_view_url'=>$track . $aff));
 
 		}
 
