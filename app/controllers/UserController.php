@@ -100,7 +100,8 @@ class UserController extends BaseController {
 			'userId'	=>$userId,
 			'email'		=>$email,
 			'restorable'=>$restorable,
-			'theme' 	=>$userTheme
+			'theme' 	=>$userTheme,
+			'userCount' 	=>$user
 		);
 
 
