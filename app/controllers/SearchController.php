@@ -623,7 +623,28 @@ class SearchController extends BaseController {
 	}//getItunes
 
 
+	public function fixAff(){
+		$pre = '&at=';
+		$aff = '1l3vkSc';
+		$itunesArray = array();
 
+		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre . '%')
+				->orWhere('collection_view_url', 'LIKE', '%' . $pre . '%')
+				->orWhere('track_view_url', 'LIKE', '%' . $pre . '%')
+				->get();
+
+		for($itunes as $i){
+			array_push($itunesArray, $i . $aff);
+
+			// Itunes::update(
+			// 	'artist_view_url'=>$i . $aff,
+			// 	'collection_view_url'=>$i . $aff,
+			// 	'track_view_url'=>$i . $aff);
+		}
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($itunesArray);
+	}
 
 
 
