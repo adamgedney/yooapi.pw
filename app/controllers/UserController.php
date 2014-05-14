@@ -63,7 +63,7 @@ class UserController extends BaseController {
 					->count();
 
 		//If user exists, get id
-		if($user !== 0){
+		if(isset($user[0])){
 
 			//Fetch current user to begin building their acct
 			$userObj = User::where('email', "=", $email)
