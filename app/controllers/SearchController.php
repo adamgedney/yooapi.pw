@@ -634,7 +634,7 @@ class SearchController extends BaseController {
 				->get();
 
 		foreach(json_decode($itunes) as $i){
-			array_push($itunesArray, $i . $aff);
+			array_push($itunesArray, $i);
 
 			// Itunes::update(
 			// 	'artist_view_url'=>$i . $aff,
