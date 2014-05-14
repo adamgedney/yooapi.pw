@@ -689,7 +689,7 @@ class SearchController extends BaseController {
 		$itunes = "test";
 		// $itunesArray = array();
 		//Calls Model to search DB for query
-		$itunes = Itunes::where('artist_view_url', 'LIKE', '%at=%')->get();
+		$itunes = Itunes::where('artist_view_url', 'LIKE', '%at=1l3vkSc')->get();
 		// $itunes = Itunes::get();
 
 			// where('artist_view_url', 'LIKE', '%http%')
