@@ -684,7 +684,7 @@ class SearchController extends BaseController {
 
 	//Method to append my affiliate link to older database entries
 	public function fixAff(){
-		$pre = 'uo=4';
+		$pre = "uo=4";
 		$aff = '1l3vkSc';
 		$itunes = "test";
 		// $itunesArray = array();
