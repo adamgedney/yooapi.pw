@@ -688,8 +688,9 @@ class SearchController extends BaseController {
 		$aff = '1l3vkSc';
 		$itunes = "test";
 		// $itunesArray = array();
-
-		$itunes = Itunes::get();
+		//Calls Model to search DB for query
+		$itunes = Itunes::where('query', '=', '385')->get();
+		// $itunes = Itunes::get();
 
 			// where('artist_view_url', 'LIKE', '%http%')
 				// ->
