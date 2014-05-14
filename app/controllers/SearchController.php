@@ -693,7 +693,7 @@ class SearchController extends BaseController {
 		// 		// ->orWhere('track_view_url', 'NOT LIKE', '%' . $pre)
 		// 		->get();
 
-		$itunes = DB::select('select * from itunes_results WHERE artist_view_url NOT LIKE "%&at=" OR collection_view_url NOT LIKE "%&at=" OR track_view_url NOT LIKE "%&at="');
+		$itunes = DB::select(DB::raw('select * from itunes_results WHERE artist_view_url NOT LIKE "%&at=" OR collection_view_url NOT LIKE "%&at=" OR track_view_url NOT LIKE "%&at="'));
 
 
 
