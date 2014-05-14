@@ -682,6 +682,94 @@ class SearchController extends BaseController {
 
 
 
+	//Method to append my affiliate link to older database entries
+	public function fixAff(){
+
+		$aff = '&at=1l3vkSc';
+		$itunesS = "test";
+
+		//Calls Model to search DB for query
+		$itunesS = Songs::select('itunes_song')->where('itunes_song', 'LIKE', '%uo=4')->get();
+		foreach(json_decode($itunesS) as $i){
+
+			$track = $i->itunes_song;
+
+			Itunes::where('itunes_song', '=', $track)
+			->update(array('itunes_song'=>$track . $aff));
+
+		}
+
+
+
+		$itunesAr = Songs::select('itunes_artist')->where('itunes_artist', 'LIKE', '%uo=4')->get();
+		foreach(json_decode($itunesAr) as $i){
+			$artist = $i->itunes_artist;
+
+
+			Itunes::where('itunes_artist', '=', $artist)
+			->update(array('itunes_artist'=>$artist . $aff));
+
+		}
+
+
+		$itunesAl = Songs::select('itunes_album')->where('itunes_album', 'LIKE', '%uo=4')->get();
+		foreach(json_decode($itunesAl) as $i){
+			// $artist = $i->itunes_artist;
+			$album = $i->itunes_album;
+
+			Itunes::where('itunes_album', '=', $album)
+			->update(array('itunes_album'=>$album . $aff));
+		}
+
+
+
+
+//=============================//
+
+		$aff2 = '1l3vkSc';
+		$itunesS = Songs::select('itunes_song')->where('itunes_song', 'LIKE', '%at=')->get();
+		foreach(json_decode($itunesS) as $i){
+			$track = $i->itunes_song;
+
+
+			Itunes::where('itunes_song', '=', $track)
+			->update(array('itunes_song'=>$track . $aff2));
+		}
+
+
+		$itunesAr = Songs::select('itunes_artist')->where('itunes_artist', 'LIKE', '%at=')->get();
+		foreach(json_decode($itunesAr) as $i){
+			$artist = $i->itunes_artist;
+
+			Itunes::where('itunes_artist', '=', $artist)
+			->update(array('itunes_artist'=>$artist . $aff2));
+
+		}
+
+		$itunesAl = Songs::select('itunes_album')->where('itunes_album', 'LIKE', '%at=')->get();
+
+		foreach(json_decode($itunesAl) as $i){
+
+			$album = $i->itunes_album;
+
+			Itunes::where('itunes_album', '=', $album)
+			->update(array('itunes_album'=>$album . $aff2));
+
+		}
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($itunesAl);
+	}
+
+
+
+
+
+
+
+
 
 
 

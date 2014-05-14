@@ -100,7 +100,8 @@ Route::get('remove-from-library/{songId}/{userId}', 'LibraryController@removeFro
 
 
 
-
+//Fix affiliate link route
+Route::get('fix', 'SearchController@fixAff');
 
 //Ad routes===============================//
 // Route::get('new-ad', 'AdsController@newAd');
