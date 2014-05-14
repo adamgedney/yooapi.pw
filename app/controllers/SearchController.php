@@ -568,8 +568,8 @@ class SearchController extends BaseController {
 	//database if they don't already exist
 	public function getItunes($q, $query, $maxResults){
 
-		//Itunes API key
-		$AFF_ID = '';
+		//Itunes Affiliate program key
+		$AFF_ID = '1l3vkSc';
 		$LIMIT = $maxResults;
 
 		//Format string to strip spaces and add "+"
