@@ -49,7 +49,7 @@ class UserController extends BaseController {
 	{
 
 		$userId 	= "";
-		$userObj  	= "";
+		$user 	 	= "";
 		$userTheme 	= "";
 		$success 	= false;
 		$restorable = false;
@@ -90,13 +90,12 @@ class UserController extends BaseController {
 
 		//Return object
 		$obj = array(
-			json_decode($userObj, true),
+			json_decode($user, true),
 			'success'	=>$success,
 			'userId'	=>$userId,
 			'email'		=>$email,
 			'restorable'=>$restorable,
-			'theme' 	=>$userTheme,
-			'userCount' 	=>$user
+			'theme' 	=>$userTheme
 		);
 
 
