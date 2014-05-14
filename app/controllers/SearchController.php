@@ -694,7 +694,7 @@ class SearchController extends BaseController {
 
 			$track = $i->itunes_song;
 
-			Itunes::where('itunes_song', '=', $track)
+			Songs::where('itunes_song', '=', $track)
 			->update(array('itunes_song'=>$track . $aff));
 
 		}
@@ -706,7 +706,7 @@ class SearchController extends BaseController {
 			$artist = $i->itunes_artist;
 
 
-			Itunes::where('itunes_artist', '=', $artist)
+			Songs::where('itunes_artist', '=', $artist)
 			->update(array('itunes_artist'=>$artist . $aff));
 
 		}
@@ -714,10 +714,10 @@ class SearchController extends BaseController {
 
 		$itunesAl = Songs::select('itunes_album')->where('itunes_album', 'LIKE', '%uo=4')->get();
 		foreach(json_decode($itunesAl) as $i){
-			// $artist = $i->itunes_artist;
+
 			$album = $i->itunes_album;
 
-			Itunes::where('itunes_album', '=', $album)
+			Songs::where('itunes_album', '=', $album)
 			->update(array('itunes_album'=>$album . $aff));
 		}
 
@@ -732,7 +732,7 @@ class SearchController extends BaseController {
 			$track = $i->itunes_song;
 
 
-			Itunes::where('itunes_song', '=', $track)
+			Songs::where('itunes_song', '=', $track)
 			->update(array('itunes_song'=>$track . $aff2));
 		}
 
@@ -741,7 +741,7 @@ class SearchController extends BaseController {
 		foreach(json_decode($itunesAr) as $i){
 			$artist = $i->itunes_artist;
 
-			Itunes::where('itunes_artist', '=', $artist)
+			Songs::where('itunes_artist', '=', $artist)
 			->update(array('itunes_artist'=>$artist . $aff2));
 
 		}
@@ -752,7 +752,7 @@ class SearchController extends BaseController {
 
 			$album = $i->itunes_album;
 
-			Itunes::where('itunes_album', '=', $album)
+			Songs::where('itunes_album', '=', $album)
 			->update(array('itunes_album'=>$album . $aff2));
 
 		}
