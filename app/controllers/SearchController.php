@@ -684,13 +684,13 @@ class SearchController extends BaseController {
 
 	//Method to append my affiliate link to older database entries
 	public function fixAff(){
-		$pre = '&at=';
+		$pre = '&uo=4';
 		$aff = '1l3vkSc';
 		$itunesArray = array();
 
-		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre . '%')
-				->orWhere('collection_view_url', 'LIKE', '%' . $pre . '%')
-				->orWhere('track_view_url', 'LIKE', '%' . $pre . '%')
+		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre)
+				->orWhere('collection_view_url', 'LIKE', '%' . $pre)
+				->orWhere('track_view_url', 'LIKE', '%' . $pre)
 				->get();
 
 		// $itunes = DB::select(DB::raw('select * from itunes_results WHERE artist_view_url NOT LIKE "%&at=" OR collection_view_url NOT LIKE "%&at=" OR track_view_url NOT LIKE "%&at="'));
@@ -703,14 +703,14 @@ class SearchController extends BaseController {
 			$track = $i->track_view_url;
 
 
-			Itunes::where('artist_view_url', '=', $artist)
-			->update(array('artist_view_url'=>$artist . $aff));
+			// Itunes::where('artist_view_url', '=', $artist)
+			// ->update(array('artist_view_url'=>$artist . $aff));
 
-			Itunes::where('collection_view_url', '=', $album)
-			->update(array('collection_view_url'=>$album . $aff));
+			// Itunes::where('collection_view_url', '=', $album)
+			// ->update(array('collection_view_url'=>$album . $aff));
 
-			Itunes::where('track_view_url', '=', $track)
-			->update(array('track_view_url'=>$track . $aff));
+			// Itunes::where('track_view_url', '=', $track)
+			// ->update(array('track_view_url'=>$track . $aff));
 
 		}
 
