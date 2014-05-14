@@ -694,7 +694,7 @@ class SearchController extends BaseController {
 		// 		->get();
 
 
-		$itunes = DB::query('SELECT * FROM itunes_results WHERE artist_view_url NOT LIKE "%&at=%"');
+		$itunes = DB:query('SELECT * FROM itunes_results WHERE artist_view_url NOT LIKE "%&at=%"');
 
 
 		foreach(json_decode($itunes) as $i){
