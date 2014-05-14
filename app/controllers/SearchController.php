@@ -623,32 +623,11 @@ class SearchController extends BaseController {
 	}//getItunes
 
 
-	public function fixAff(){
-		$pre = '&at=';
-		$aff = '1l3vkSc';
-		$itunesArray = array();
 
-		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre . '%')
-				->orWhere('collection_view_url', 'LIKE', '%' . $pre . '%')
-				->orWhere('track_view_url', 'LIKE', '%' . $pre . '%')
-				->get();
 
-		foreach(json_decode($itunes) as $i){
-			$artist = $i->artist_view_url;
-			$album = $i->collection_view_url;
-			$track = $i->track_view_url;
 
-			array_push($itunesArray, $artist . $aff, $album . $aff, $track . $aff);
 
-			// Itunes::update(
-			// 	'artist_view_url'=>$i . $aff,
-			// 	'collection_view_url'=>$i . $aff,
-			// 	'track_view_url'=>$i . $aff);
-		}
 
-		header('Access-Control-Allow-Origin: *');
-		return Response::json($itunesArray);
-	}
 
 
 
@@ -694,6 +673,46 @@ class SearchController extends BaseController {
 	}
 
 
+
+
+
+
+
+
+
+
+
+	//Method to append my affiliate link to older database entries
+	public function fixAff(){
+		$pre = '&at=';
+		$aff = '1l3vkSc';
+		$itunesArray = array();
+
+		$itunes = Itunes::where('artist_view_url', 'LIKE', '%' . $pre . '%')
+				->orWhere('collection_view_url', 'LIKE', '%' . $pre . '%')
+				->orWhere('track_view_url', 'LIKE', '%' . $pre . '%')
+				->get();
+
+		foreach(json_decode($itunes) as $i){
+			$artist = $i->artist_view_url;
+			$album = $i->collection_view_url;
+			$track = $i->track_view_url;
+
+
+			Itunes::where('artist_view_url', '=', $artist)
+			->update('artist_view_url'=>$artist . $aff);
+
+			Itunes::where('collection_view_url', '=', $album)
+			->update('collection_view_url'=>$album . $aff);
+
+			Itunes::where('track_view_url', '=', $track)
+			->update('track_view_url'=>$track . $aff);
+
+		}
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($itunes);
+	}
 
 
 
