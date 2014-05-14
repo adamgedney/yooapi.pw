@@ -689,10 +689,10 @@ class SearchController extends BaseController {
 		$itunes = "test";
 		// $itunesArray = array();
 
-		$itunes = Itunes::where('artist_view_url', 'LIKE', '%http%')
-				->get();
+		$itunes = Itunes::get();
 
-
+			// where('artist_view_url', 'LIKE', '%http%')
+				// ->
 				// ->orWhere('collection_view_url', 'LIKE', '%uo=4')
 				// ->orWhere('track_view_url', 'LIKE', '%uo=4')
 
