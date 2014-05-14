@@ -633,7 +633,7 @@ class SearchController extends BaseController {
 				->orWhere('track_view_url', 'LIKE', '%' . $pre . '%')
 				->get();
 
-		for($itunes as $i){
+		for(json_decode($itunes) as $i){
 			array_push($itunesArray, $i . $aff);
 
 			// Itunes::update(
