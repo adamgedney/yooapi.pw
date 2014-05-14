@@ -576,6 +576,25 @@ class UserController extends BaseController {
 
 
 
+	public function renameDevice($deviceId, $name)
+	{
+
+		$renameDevice = Devices::where('id', '=', $deviceId)
+							->update(array('name' => $name));
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json($renameDevice);
+	}
+
+
+
+
+
+
+
+
+
 	public function deleteDevice($deviceId)
 	{
 
