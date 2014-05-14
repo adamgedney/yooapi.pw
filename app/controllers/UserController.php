@@ -673,9 +673,9 @@ class UserController extends BaseController {
 
 	public function sendEmail($email, $token){
 
-		$from 		= 'no-reply@yootunes.com';
-		$support 	= 'support@yootunes.com';
-		$link 		= 'http://yootunes.com/?reset=' . $token;
+		$from 		= 'no-reply@atomplayer.com';
+		$support 	= 'support@atomplayer.com';
+		$link 		= 'http://atomplayer.com/?reset=' . $token;
 
 		//MAIL password reset email
 		$header  = 'MIME-Version: 1.0' . "\r\n";
@@ -684,15 +684,15 @@ class UserController extends BaseController {
 		$header .= 'From: Yootunes.com <' . $from . '>' . "\r\n";
 
 		$to = $email;
-		$subject = "Reset your YooTunes password";
+		$subject = "Reset your atomplayer password";
 
-		$message = "YooTunes received a request to reset your password. Please click on the link below to reset it. \r\n \r\n" .
+		$message = "atomplayer received a request to reset your password. Please click on the link below to reset it. \r\n \r\n" .
 		"(copy & paste it into your address bar if it's not clickable) \r\n \r\n" .
 		"\r\n \r\n" .
 		$link . "\r\n \r\n" .
 		"If you feel you received this message in error, please email support at " . $support . " \r\n \r\n" .
 		"Thanks! \r\n" .
-		"YooTunes support";
+		"atomplayer support elves";
 
 		//send email
 		$mail = mail($to,$subject,$message,$header);
