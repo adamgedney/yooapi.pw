@@ -294,14 +294,14 @@ class UserController extends BaseController {
 	public function forgotPassword($email){
 
 		$message;
-		$userExists = User::where('email', '=', $email)->count();
+		$user = User::where('email', '=', $email)->get();
 
 
 		//If we have the user
-		if($userExists !== "0"){
+		if(isset($user[0])){
 
 			//Get the user/user id
-			$user = User::where('email', '=', $email)->get();
+
 			$userId = $user[0]->id;
 
 			//Build log timestamp
