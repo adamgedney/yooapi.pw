@@ -20,7 +20,7 @@ class LogController extends BaseController {
 
 
 
-	public function logShareSong($userId, $songId){
+	public function logSharedSong($userId, $songId){
 
 		SongsLog::insert(array(
 			'user_id'=>$userId,

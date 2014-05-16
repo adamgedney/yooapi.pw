@@ -98,7 +98,7 @@ Route::get('remove-from-library/{songId}/{userId}', 'LibraryController@removeFro
 //Logging routes===============================//
 Route::get('log-song-play/{userId}/{songId}', 'LogController@logSongPlay');
 
-Route::get('log-share-song/{userId}/{songId}', 'LogController@logShareSong');
+Route::get('log-shared-song/{userId}/{songId}', 'LogController@logSharedSong');
 
 Route::get('log-shared-playlist/{userId}/{playlistId}', 'LogController@logSharedPlaylist');
 
