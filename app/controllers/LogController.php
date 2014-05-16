@@ -131,22 +131,6 @@ class LogController extends BaseController {
 
 
 
-	//Used by UserController========================//
-	public static function logForgotPassword($userId){
-		date_default_timezone_set('UTC');
-		$time = date(DATE_RFC2822);
-
-		UserLog::insert(array(
-			'user_id'=>$userId,
-			'forgot_password'=>$time
-			));
-
-		header('Access-Control-Allow-Origin: *');
-		return Response::json("Logged forgot password");
-	}
-
-
-
 
 
 

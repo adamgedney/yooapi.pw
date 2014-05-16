@@ -304,7 +304,9 @@ class UserController extends BaseController {
 			$user = User::where('email', '=', $email)->get();
 			$userId = $user[0]->id;
 
-
+			//Build log timestamp
+			date_default_timezone_set('UTC');
+			$time = date(DATE_RFC2822);
 
 			//generate a "random" token for this request
 			$token = md5(uniqid($userId, true));
@@ -312,7 +314,8 @@ class UserController extends BaseController {
 			//Insert token into log for later verification of request
 			$logToken = UserLog::insert(array(
 				'user_id'		=>$userId,
-				'reset_token'	=>$token
+				'reset_token'	=>$token,
+				'forgot_password'=>$time
 			));
 
 
@@ -328,8 +331,6 @@ class UserController extends BaseController {
 			}
 
 
-			//Log forgot password activity
-			LogController::logForgotPassword($userId);
 
 		}else{//If user is not in system
 
