@@ -104,13 +104,7 @@ Route::get('log-shared-playlist/{userId}/{playlistId}', 'LogController@logShared
 
 Route::get('log-playlist-play/{userId}/{playlistId}', 'LogController@logPlaylistPlay');
 
-// Route::get('log-playlist-retrieved/{userId}/{playlistId}', 'LogController@logPlaylistRetrieved');
-
 Route::get('log-login/{userId}', 'LogController@logLogin');
-
-// Route::get('log-failed-login/{email}', 'LogController@logFailedLogin');
-
-// Route::get('log-forgot-password/{email}', 'LogController@logForgotPassword');
 
 Route::get('log-logout/{userId}', 'LogController@logLogout');
 
