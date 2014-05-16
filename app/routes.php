@@ -106,7 +106,7 @@ Route::get('log-playlist-play/{userId}/{playlistId}', 'LogController@logPlaylist
 
 // Route::get('log-playlist-retrieved/{userId}/{playlistId}', 'LogController@logPlaylistRetrieved');
 
-// Route::get('log-login/{userId}', 'LogController@logLogin');
+Route::get('log-login/{userId}', 'LogController@logLogin');
 
 // Route::get('log-failed-login/{email}', 'LogController@logFailedLogin');
 

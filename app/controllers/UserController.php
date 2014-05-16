@@ -71,8 +71,6 @@ class UserController extends BaseController {
 			$success 	= true;
 
 
-			//Log user login activity
-			LogController::logLogin($userId);
 
 
 		}else{//If user check failed, check to see if user is deleted

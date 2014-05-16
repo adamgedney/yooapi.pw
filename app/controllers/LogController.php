@@ -96,7 +96,7 @@ class LogController extends BaseController {
 
 
 	//Used by UserController========================//
-	public static function logLogin($userId){
+	public function logLogin($userId){
 		date_default_timezone_set('UTC');
 		$time = date(DATE_RFC2822);
 
