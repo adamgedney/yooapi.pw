@@ -45,7 +45,7 @@ class LogController extends BaseController {
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
 			'playlist_id'=>$playlistId,
-			'shared_at'=>$time)
+			'shared_at'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -96,7 +96,7 @@ class LogController extends BaseController {
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
-			'logged_in'=>$time)
+			'logged_in'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
