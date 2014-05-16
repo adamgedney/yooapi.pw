@@ -5,11 +5,12 @@ class LogController extends BaseController {
 
 
 	public function logSongPlay($userId, $songId){
+		$time = $this->timestamp();
 
 		SongsLog::insert(array(
 			'user_id'=>$userId,
 			'song_id'=>$songId,
-			'played_at'=>$this->timestamp()
+			'played_at'=>$time
 			));
 
 
@@ -21,11 +22,12 @@ class LogController extends BaseController {
 
 
 	public function logSharedSong($userId, $songId){
+		$time = $this->timestamp();
 
 		SongsLog::insert(array(
 			'user_id'=>$userId,
 			'song_id'=>$songId,
-			'shared_at'=>$this->timestamp()
+			'shared_at'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -38,11 +40,12 @@ class LogController extends BaseController {
 
 
 	public function logSharedPlaylist($userId, $playlistId){
+		$time = $this->timestamp();
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
 			'playlist_id'=>$playlistId,
-			'shared_at'=>$this->timestamp()
+			'shared_at'=>$time)
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -53,11 +56,12 @@ class LogController extends BaseController {
 
 
 	public function logPlaylistPlay($userId, $playlistId){
+		$time = $this->timestamp();
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
 			'playlist_id'=>$playlistId,
-			'played_at'=>$this->timestamp()
+			'played_at'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -70,11 +74,12 @@ class LogController extends BaseController {
 
 	//Used by PlaylsitsController========================//
 	public static function logPlaylistRetrieved($userId, $sharedPlaylistId){
+		$time = $this->timestamp();
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
 			'playlist_id'=>$sharedPlaylistId,
-			'retrieved_at'=>$this->timestamp()
+			'retrieved_at'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -87,10 +92,11 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logLogin($userId){
+		$time = $this->timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
-			'logged_in'=>$this->timestamp()
+			'logged_in'=>$time)
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -103,10 +109,11 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logFailedLogin($email){
+		$time = $this->timestamp();
 
 		UserLog::insert(array(
 			'email'=>$email,
-			'failed_login'=>$this->timestamp()
+			'failed_login'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -119,10 +126,11 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logForgotPassword($userId){
+		$time = $this->timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
-			'forgot_password'=>$this->timestamp()
+			'forgot_password'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -135,10 +143,11 @@ class LogController extends BaseController {
 
 
 	public function logLogout($userId){
+		$time = $this->timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
-			'logged_out'=>$this->timestamp()
+			'logged_out'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
@@ -151,10 +160,11 @@ class LogController extends BaseController {
 
 
 	public function logLoginFromSignup($userId){
+		$time = $this->timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
-			'login_from_signup'=>$this->timestamp()
+			'login_from_signup'=>$time
 			));
 
 		header('Access-Control-Allow-Origin: *');
