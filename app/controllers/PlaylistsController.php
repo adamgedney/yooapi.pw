@@ -32,12 +32,13 @@ class PlaylistsController extends BaseController {
 
 		$getPlaylistId = json_decode($thisList, true);
 
-		//Store new playlist id
 
+			//Store new playlist id
 			$playlistId = $getPlaylistId[0]['id'];
+			$SHARE_KEY 	= '83027179269257243';
 
 			//Generate share url
-			$shareUrl = $userId . '83027179269257243' . $playlistId;
+			$shareUrl = $userId . $SHARE_KEY . $playlistId;
 
 			//Add share url to new playlist entry
 			$addShareUrl = Playlists::where('id', '=', $playlistId)
@@ -153,6 +154,12 @@ class PlaylistsController extends BaseController {
 				//Add song to library
 				$addtolib = LibraryController::addToLibrary($songId, $userId);
 			}//foreach
+
+
+			//Lof shared plyalist retrieval
+			LogController::logPlaylistRetrieved($userId, $sharedPlaylistId);
+
+
 		}//check shared playlist
 
 
@@ -329,29 +336,5 @@ class PlaylistsController extends BaseController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-	//Return URL to retrieve a playlist
-	//Mark playlist as public w/ is_shared
-	//Build URL w/ username and playlist id
-	public function sharePlaylist()
-	{
-		return "Testing route";
-	}
-
-
-
-
-	//================//
-	//Internal Methods//
-	//================//
 
 }

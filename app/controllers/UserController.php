@@ -71,6 +71,9 @@ class UserController extends BaseController {
 			$success 	= true;
 
 
+			//Log user login activity
+			LogController::logLogin($userId);
+
 
 		}else{//If user check failed, check to see if user is deleted
 
@@ -84,6 +87,10 @@ class UserController extends BaseController {
 			//account, announce user as restorable
 			if($restoreUser !== 0){
 				$restorable = true;
+			}else{
+
+				//Log a failed login attempt
+				LogController::logFailedLogin($email);
 			}
 		}
 
@@ -323,6 +330,8 @@ class UserController extends BaseController {
 			}
 
 
+			//Log forgot password activity
+			LogController::logForgotPassword($userId);
 
 		}else{//If user is not in system
 

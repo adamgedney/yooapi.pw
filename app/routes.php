@@ -44,19 +44,6 @@ Route::get('rename-device/{deviceId}/{name}', 'UserController@renameDevice');
 
 
 
-//Client routes==========================//
-// Route::get('new-client', 'ClientController@newClient');
-
-// Route::get('get-client', 'ClientController@getClient');
-
-// Route::get('get-clients', 'ClientController@getClient');
-
-// Route::get('update-client', 'ClientController@updateClient');
-
-// Route::get('delete-client', 'ClientController@deleteClient');
-
-// Route::get('reset-client-password', 'ClientController@resetClientPassword');
-
 
 
 
@@ -64,6 +51,8 @@ Route::get('rename-device/{deviceId}/{name}', 'UserController@renameDevice');
 Route::get('search/{searchQuery}/{userId}', 'SearchController@search');
 
 Route::get('get-search-history/{userId}/{characters}', 'SearchController@getSearchHistory');
+
+
 
 
 
@@ -90,6 +79,7 @@ Route::get('rename-playlist/{playlistId}/{newName}', 'PlaylistsController@rename
 
 
 
+
 //Library routes============================//
 
 Route::get('get-library/{id}', 'LibraryController@getLibrary');
@@ -102,26 +92,29 @@ Route::get('remove-from-library/{songId}/{userId}', 'LibraryController@removeFro
 
 
 
-//Fix affiliate link route
-// Route::get('fix', 'SearchController@fixAff');
 
 
 
+//Logging routes===============================//
+Route::get('log-song-play/{userId}/{songId}', 'LogController@logSongPlay');
 
-//Ad routes===============================//
-// Route::get('new-ad', 'AdsController@newAd');
+Route::get('log-share-song/{userId}/{songId}', 'LogController@logShareSong');
 
-// Route::get('get-ad', 'AdsController@getAd');
+Route::get('log-shared-playlist/{userId}/{playlistId}', 'LogController@logSharedPlaylist');
 
-// Route::get('get-ads', 'AdsController@getAds');
+Route::get('log-playlist-play/{userId}/{playlistId}', 'LogController@logPlaylistPlay');
 
-// Route::get('update-ad', 'AdsController@updateAd');
+// Route::get('log-playlist-retrieved/{userId}/{playlistId}', 'LogController@logPlaylistRetrieved');
 
-// Route::get('delete-ad', 'AdsController@deleteAd');
+// Route::get('log-login/{userId}', 'LogController@logLogin');
 
+// Route::get('log-failed-login/{email}', 'LogController@logFailedLogin');
 
+// Route::get('log-forgot-password/{email}', 'LogController@logForgotPassword');
 
+Route::get('log-logout/{userId}', 'LogController@logLogout');
 
+Route::get('log-login-from-signup/{userId}', 'LogController@logLoginFromSignup');
 
 
 
