@@ -74,7 +74,7 @@ class LogController extends BaseController {
 
 	//Used by PlaylsitsController========================//
 	public static function logPlaylistRetrieved($userId, $sharedPlaylistId){
-		$time = $this->timestamp();
+		$time = timestamp();
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
@@ -92,7 +92,7 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logLogin($userId){
-		$time = $this->timestamp();
+		$time = timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
@@ -109,7 +109,7 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logFailedLogin($email){
-		$time = $this->timestamp();
+		$time = timestamp();
 
 		UserLog::insert(array(
 			'email'=>$email,
@@ -126,7 +126,7 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logForgotPassword($userId){
-		$time = $this->timestamp();
+		$time = timestamp();
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
