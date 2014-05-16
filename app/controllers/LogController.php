@@ -5,7 +5,8 @@ class LogController extends BaseController {
 
 
 	public function logSongPlay($userId, $songId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		SongsLog::insert(array(
 			'user_id'=>$userId,
@@ -22,7 +23,8 @@ class LogController extends BaseController {
 
 
 	public function logSharedSong($userId, $songId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		SongsLog::insert(array(
 			'user_id'=>$userId,
@@ -40,7 +42,8 @@ class LogController extends BaseController {
 
 
 	public function logSharedPlaylist($userId, $playlistId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
@@ -56,7 +59,8 @@ class LogController extends BaseController {
 
 
 	public function logPlaylistPlay($userId, $playlistId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
@@ -74,7 +78,8 @@ class LogController extends BaseController {
 
 	//Used by PlaylsitsController========================//
 	public static function logPlaylistRetrieved($userId, $sharedPlaylistId){
-		$time = timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		PlaylistsLog::insert(array(
 			'user_id'=>$userId,
@@ -92,7 +97,8 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logLogin($userId){
-		$time = timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
@@ -109,7 +115,8 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logFailedLogin($email){
-		$time = timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		UserLog::insert(array(
 			'email'=>$email,
@@ -126,7 +133,8 @@ class LogController extends BaseController {
 
 	//Used by UserController========================//
 	public static function logForgotPassword($userId){
-		$time = timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
@@ -143,7 +151,8 @@ class LogController extends BaseController {
 
 
 	public function logLogout($userId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
@@ -160,7 +169,8 @@ class LogController extends BaseController {
 
 
 	public function logLoginFromSignup($userId){
-		$time = $this->timestamp();
+		date_default_timezone_set('UTC');
+		$time = date(DATE_RFC2822);
 
 		UserLog::insert(array(
 			'user_id'=>$userId,
@@ -175,17 +185,5 @@ class LogController extends BaseController {
 
 
 
-
-
-
-
-
-	public function timestamp(){
-
-		date_default_timezone_set('UTC');
-		$timestamp = date(DATE_RFC2822);
-
-		return $timestamp;
-	}
 
 }
