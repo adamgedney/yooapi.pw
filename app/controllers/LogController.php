@@ -113,8 +113,8 @@ class LogController extends BaseController {
 
 
 
-	//Used by UserController========================//
-	public static function logFailedLogin($email){
+
+	public function logFailedLogin($email){
 		date_default_timezone_set('UTC');
 		$time = date(DATE_RFC2822);
 
