@@ -169,7 +169,7 @@ class UserController extends BaseController {
 					'registered_with'	=> 'plus',
 					'title'				=> $title,
 					'is_deleted' 		=> 'false',
-					'theme' 			=> 'light'
+					'theme' 			=> 'dark'
 				));
 
 
