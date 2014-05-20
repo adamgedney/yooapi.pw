@@ -87,8 +87,6 @@ class UserController extends BaseController {
 				$restorable = true;
 			}else{
 
-				//Log a failed login attempt
-				LogController::logFailedLogin($email);
 			}
 		}
 

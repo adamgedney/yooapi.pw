@@ -106,6 +106,8 @@ Route::get('log-playlist-play/{userId}/{playlistId}', 'LogController@logPlaylist
 
 Route::get('log-login/{userId}', 'LogController@logLogin');
 
+Route::get('log-failed-login/{email}', 'LogController@logFailedLogin');
+
 Route::get('log-logout/{userId}', 'LogController@logLogout');
 
 Route::get('log-login-from-signup/{userId}', 'LogController@logLoginFromSignup');
