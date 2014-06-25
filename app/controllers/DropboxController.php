@@ -14,10 +14,12 @@ class DropboxController extends BaseController {
 
 		$appInfo = dbx\AppInfo::loadFromJsonFile("config.json");
 
-
+		$obj = array(
+			'appInfo'	=>$appInfo,
+			'string'	=>'test string');
 
 		header('Access-Control-Allow-Origin: *');
-		return Response::json($appInfo);
+		return Response::json($obj);
 
 	}
 
