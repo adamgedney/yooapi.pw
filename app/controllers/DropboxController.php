@@ -11,10 +11,11 @@ class DropboxController extends BaseController {
 	public function dbTest(){
 
 		// $acctInfo = Dropbox::getAccountInfo();
-		$authorizeUrl = $webAuth->start();
+		$acctInfo = Dropbox;
+
 
 		$obj = array(
-			'appInfo'	=>$authorizeUrl,
+			'appInfo'	=>$acctInfo,
 			'string'	=>'test string');
 
 		header('Access-Control-Allow-Origin: *');
