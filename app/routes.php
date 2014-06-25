@@ -117,6 +117,9 @@ Route::get('log-login-from-signup/{userId}', 'LogController@logLoginFromSignup')
 
 
 
+//Dropbox routes===============================//
+
+Route::get('db', 'DropboxController@test');
 
 
 

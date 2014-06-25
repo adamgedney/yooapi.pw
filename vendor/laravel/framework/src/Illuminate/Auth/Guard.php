@@ -72,6 +72,13 @@ class Guard {
 	protected $loggedOut = false;
 
 	/**
+	 * Indicates if a token user retrieval has been attempted.
+	 *
+	 * @var bool
+	 */
+	protected $tokenRetrievalAttempted = false;
+
+	/**
 	 * Create a new authentication guard.
 	 *
 	 * @param  \Illuminate\Auth\UserProviderInterface  $provider
@@ -169,8 +176,10 @@ class Guard {
 	 */
 	protected function getUserByRecaller($recaller)
 	{
-		if ($this->validRecaller($recaller))
+		if ($this->validRecaller($recaller) && ! $this->tokenRetrievalAttempted)
 		{
+			$this->tokenRetrievalAttempted = true;
+
 			list($id, $token) = explode('|', $recaller, 2);
 
 			$this->viaRemember = ! is_null($user = $this->provider->retrieveByToken($id, $token));
@@ -203,7 +212,7 @@ class Guard {
 	}
 
 	/**
-	 * Deteremine if the recaller cookie is in a valid format.
+	 * Determine if the recaller cookie is in a valid format.
 	 *
 	 * @param  string  $recaller
 	 * @return bool
@@ -402,14 +411,14 @@ class Guard {
 	 */
 	public function login(UserInterface $user, $remember = false)
 	{
-		$this->updateSession($id = $user->getAuthIdentifier());
+		$this->updateSession($user->getAuthIdentifier());
 
 		// If the user should be permanently "remembered" by the application we will
 		// queue a permanent cookie that contains the encrypted copy of the user
 		// identifier. We will then decrypt this later to retrieve the users.
 		if ($remember)
 		{
-			$this->refreshRememberToken($user);
+			$this->createRememberTokenIfDoesntExist($user);
 
 			$this->queueRecallerCookie($user);
 		}
@@ -505,7 +514,10 @@ class Guard {
 		// listening for anytime a user signs out of this application manually.
 		$this->clearUserDataFromStorage();
 
-		$this->refreshRememberToken($user);
+		if ( ! is_null($this->user))
+		{
+			$this->refreshRememberToken($user);
+		}
 
 		if (isset($this->events))
 		{
@@ -545,6 +557,20 @@ class Guard {
 		$user->setRememberToken($token = str_random(60));
 
 		$this->provider->updateRememberToken($user, $token);
+	}
+
+	/**
+	 * Create a new remember token for the user if one doesn't already exist.
+	 *
+	 * @param  \Illuminate\Auth\UserInterface  $user
+	 * @return void
+	 */
+	protected function createRememberTokenIfDoesntExist(UserInterface $user)
+	{
+		if (is_null($user->getRememberToken()))
+		{
+			$this->refreshRememberToken($user);
+		}
 	}
 
 	/**
