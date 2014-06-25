@@ -11,11 +11,17 @@ class DropboxController extends BaseController {
 	public function dbTest(){
 
 		// $acctInfo = Dropbox::getAccountInfo();
-		$acctInfo = Dropbox;
+
+		use \Dropbox as dbx;
+
+		$appInfo = dbx\AppInfo::loadFromJsonFile("/config/packages/naturalweb/nwlaravel-dropbox/config/dropbox.json");
+		$webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+
+		$authorizeUrl = $webAuth->start();
 
 
 		$obj = array(
-			'appInfo'	=>$acctInfo,
+			'appInfo'	=>$authorizeUrl,
 			'string'	=>'test string');
 
 		header('Access-Control-Allow-Origin: *');
