@@ -1,10 +1,3 @@
-{
-  "key"		: "aus1ebbm53ym50j",
-  "secret"	: "w0wsbrmyudg2ehb"
-}
-
-//
-
 <?php
 
 /*
