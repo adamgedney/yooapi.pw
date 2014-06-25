@@ -8,7 +8,7 @@ class DropboxController extends BaseController {
 
 
 
-	public function test(){
+	public function dbTest(){
 
 		$appInfo = dbx\AppInfo::loadFromJsonFile("config.json");
 
