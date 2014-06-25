@@ -457,6 +457,8 @@ return array(
     'Net_SSH1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH1.php',
     'Net_SSH2' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
     'Normalizer' => $vendorDir . '/patchwork/utf8/class/Normalizer.php',
+    'NwLaravel\\Dropbox\\DropboxFacade' => $vendorDir . '/naturalweb/nwlaravel-dropbox/src/NwLaravel/Dropbox/DropboxFacade.php',
+    'NwLaravel\\Dropbox\\DropboxServiceProvider' => $vendorDir . '/naturalweb/nwlaravel-dropbox/src/NwLaravel/Dropbox/DropboxServiceProvider.php',
     'PHPParser_Autoloader' => $vendorDir . '/nikic/php-parser/lib/PHPParser/Autoloader.php',
     'PHPParser_Builder' => $vendorDir . '/nikic/php-parser/lib/PHPParser/Builder.php',
     'PHPParser_BuilderAbstract' => $vendorDir . '/nikic/php-parser/lib/PHPParser/BuilderAbstract.php',

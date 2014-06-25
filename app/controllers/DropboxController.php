@@ -10,12 +10,10 @@ class DropboxController extends BaseController {
 
 	public function dbTest(){
 
-		require_once "dropbox-sdk/Dropbox/autoload.php";
-
-		$appInfo = dbx\AppInfo::loadFromJsonFile("config.json");
+		$acctInfo = Dropbox::getAccountInfo();
 
 		$obj = array(
-			'appInfo'	=>$appInfo,
+			'appInfo'	=>$acctInfo,
 			'string'	=>'test string');
 
 		header('Access-Control-Allow-Origin: *');

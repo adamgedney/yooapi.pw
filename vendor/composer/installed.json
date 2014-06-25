@@ -1725,5 +1725,59 @@
         "keywords": [
             "dropbox"
         ]
+    },
+    {
+        "name": "naturalweb/nwlaravel-dropbox",
+        "version": "0.1",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/naturalweb/NwLaravel-Dropbox.git",
+            "reference": "d2cff09c950a58b76ce58b9fcb083bcdaac0443c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/naturalweb/NwLaravel-Dropbox/zipball/d2cff09c950a58b76ce58b9fcb083bcdaac0443c",
+            "reference": "d2cff09c950a58b76ce58b9fcb083bcdaac0443c",
+            "shasum": ""
+        },
+        "require": {
+            "dropbox/dropbox-sdk": "1.1.*",
+            "laravel/framework": "~4.1",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.7.2",
+            "phpunit/phpunit": "4.0.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "suggest": {
+            "naturalweb/nwsilex": ">=0.1"
+        },
+        "time": "2014-06-14 15:27:09",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "NwLaravel": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Dropbox SDK Service Provider for the Laravel PHP Framework",
+        "homepage": "https://github.com/naturalweb/NwLaravel-Dropbox",
+        "keywords": [
+            "dropbox",
+            "laravel",
+            "php",
+            "sdk-dropbox"
+        ]
     }
 ]
