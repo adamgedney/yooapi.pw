@@ -12,7 +12,7 @@ class DropboxController extends BaseController {
 
 		require_once "dropbox-sdk/Dropbox/autoload.php";
 
-		$appInfo = dbx\AppInfo::loadFromJsonFile("app-info.json");
+		$appInfo = dbx\AppInfo::loadFromJsonFile("config.json");
 
 
 
