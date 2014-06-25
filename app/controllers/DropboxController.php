@@ -12,10 +12,9 @@ class DropboxController extends BaseController {
 
 		// $acctInfo = Dropbox::getAccountInfo();
 
-		use \Dropbox as dbx;
 
-		$appInfo = dbx\AppInfo::loadFromJsonFile("/config/packages/naturalweb/nwlaravel-dropbox/config/dropbox.json");
-		$webAuth = new dbx\WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
+		$appInfo = Dropbox::loadFromJsonFile("/config/packages/naturalweb/nwlaravel-dropbox/config/dropbox.json");
+		$webAuth = new Dropbox::WebAuthNoRedirect($appInfo, "PHP-Example/1.0");
 
 		$authorizeUrl = $webAuth->start();
 
