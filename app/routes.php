@@ -90,6 +90,10 @@ Route::get('add-to-library/{songId}/{userId}', 'LibraryController@addToLibrary')
 
 Route::get('remove-from-library/{songId}/{userId}', 'LibraryController@removeFromLibrary');
 
+Route::get('get-artists/{userId}', 'LibraryController@getArtists');
+
+Route::get('get-artist/{artistName}/{userId}', 'LibraryController@getArtist');
+
 
 
 

@@ -140,4 +140,78 @@ class LibraryController extends BaseController {
 
 
 
+
+
+
+
+
+
+
+
+	public function getArtist($artistName, $userId)
+	{
+
+		$artistSongs = Library::where('user_id', '=', $userId)
+						->where('is_deleted', '=', NULL)
+						->where('artist', 'LIKE', $artistName .'%')
+						->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+						->join('songs', 'songs.id', '=', 'library_songs.song_id')
+						->get();
+
+
+
+		header('Access-Control-Allow-Origin: *');
+		return Response::json(json_decode($artistSongs, true));
+	}
+
+
+
+
+
+
+
+
+
+	public function getArtists($userIid)
+	{
+
+
+		// $libraryCount = Library::where('user_id', '=', $id)
+		// 					->where('is_deleted', '=', NULL)
+		// 					->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+		// 					->count();
+
+
+
+
+		// $library = Library::where('user_id', '=', $id)
+		// 				->where('is_deleted', '=', NULL)
+		// 				->join('library_songs', 'library.id', '=', 'library_songs.library_id')
+		// 				->join('songs', 'songs.id', '=', 'library_songs.song_id')
+		// 				->get();
+
+
+
+		// $obj = array(
+		// 	json_decode($library, true),
+		// 	'count'		=>$libraryCount
+		// );
+
+
+
+
+		// header('Access-Control-Allow-Origin: *');
+		// return Response::json('{artist: "these are artists"}');
+	}
+
+
+
+
+
+
+
+
+
+
+
 }
