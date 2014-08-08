@@ -154,6 +154,8 @@ class LibraryController extends BaseController {
 		$artistSongs = Library::where('user_id', '=', $userId)
 						->where('is_deleted', '=', NULL)
 						->where('artist', 'LIKE', $artistName .'%')
+						->orWhere('youtube_title', 'LIKE', $artistName .'%')
+						->orWhere('description', 'LIKE', $artistName .'%')
 						->join('library_songs', 'library.id', '=', 'library_songs.library_id')
 						->join('songs', 'songs.id', '=', 'library_songs.song_id')
 						->get();
